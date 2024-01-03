@@ -1,4 +1,4 @@
-import{r as e,o,c as s,b as i}from"./index-RuUpFq4j.js";const n=`   ##ALL
+import{_ as c,j as n,o as d,f as r,h as t,a as s,w as l,l as u,u as p,p as h,g as _,t as v,A as m}from"./index-KHfDF1bW.js";const o=e=>(h("data-v-fe84fbda"),e=e(),_(),e),g={class:"rulesPage"},f=o(()=>t("div",{class:"head"},[t("div",{class:"title"},[v(" 开发规范 "),t("span",null,"RULES")])],-1)),b={class:"body"},S={class:"card"},I={class:"cardHead"},x={class:"title"},y=o(()=>t("span",null,"开发规范",-1)),j={class:"cardBody"},w=`   ##ALL
     1. 好的命名，就是最好的注释！
     2. 使用4个（或2个）软空格进行缩进！
     3. UTF-8文件请不要附带BOM！
@@ -169,4 +169,4 @@ import{r as e,o,c as s,b as i}from"./index-RuUpFq4j.js";const n=`   ##ALL
                 this._queue.splice(0，1)
                 return value
             }
-        }`,d={__name:"rules",setup(a){return(c,r)=>{const t=e("highlightjs");return o(),s("div",null,[i(t,{language:"JavaScript",code:n})])}}};export{d as default};
+        }`,E={__name:"rules",setup(e){return(A,N)=>{const a=u,i=n("highlightjs");return d(),r("div",g,[f,t("div",b,[t("div",S,[t("div",I,[t("div",x,[s(a,{color:"#3D4B6C",size:"20"},{default:l(()=>[s(p(m))]),_:1}),y])]),t("div",j,[s(i,{language:"JavaScript",code:w})])])])])}}},J=c(E,[["__scopeId","data-v-fe84fbda"]]);export{J as default};
