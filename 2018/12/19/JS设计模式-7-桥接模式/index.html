@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="xhui Blog, 博客 , 技术博客 , 前端,个人博客">
+  
+  
+    <meta name="description" content="梦想什么时候开始都不晚。">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    JS设计模式---7.桥接模式 |
+    
+    一点儿都不慌</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-JS设计模式-7-桥接模式" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS设计模式---7.桥接模式
+    </h1>
+  
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2018/12/19/JS设计模式-7-桥接模式/" class="article-date">
+  <time datetime="2018-12-18T16:00:00.000Z" itemprop="datePublished">2018-12-19</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <h3 id="适用场合及栗子"><a href="#适用场合及栗子" class="headerlink" title="适用场合及栗子"></a>适用场合及栗子</h3><ul>
+<li>事件监听器<blockquote>
+<p>假设有一个名为 getBeerById 的 API 函数。它根据一个标识符返回有关某种啤酒的信息。我们来给一个事件监听用户操作</p>
+</blockquote>
+</li>
+</ul>
+<a id="more"></a>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//bad</span></span><br><span class="line">addEvent(Element,<span class="string">'click'</span>,getBeerById)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getBeerById</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 事件对象被作为参数传递给函数，而本例并没有使用这个参数，只是从this对象中获取id</span></span><br><span class="line">  <span class="keyword">var</span> id = <span class="keyword">this</span>.id;</span><br><span class="line">  asyncRequest(<span class="string">'GET'</span>,<span class="string">`beer.uri?id=<span class="subst">$&#123;id&#125;</span>`</span>,<span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">`Request Beer:<span class="subst">$&#123;res.responseText&#125;</span>`</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// good</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getBeerById</span>(<span class="params">id,callback</span>) </span>&#123;</span><br><span class="line">  asyncRequest(<span class="string">'GET'</span>,<span class="string">`beer.uri?id=<span class="subst">$&#123;id&#125;</span>`</span>,<span class="function"><span class="keyword">function</span> (<span class="params">res</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 回调 传入返回值</span></span><br><span class="line">    callback(res.responseText)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line">addEvent(Element,<span class="string">'click'</span>,getBeerByIdBridge)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getBeerByIdBridge</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 把id作为参数传递给getBeerById函数是合情合理的，这里使用一个回调函数把回应结果返回 现在我们将针对接口而不是实现进行编程</span></span><br><span class="line">  getBeerById(<span class="keyword">this</span>.id,<span class="function"><span class="keyword">function</span> (<span class="params">beer</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`Request Beer:<span class="subst">$&#123;res.responseText&#125;</span>`</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>我们用了两种方式来实现，第一种方式把事件对象与 getBeerById 捆绑在一起，那么它只在本次事件中适用。第二种方式使用桥接模式把抽象隔离开来后，getBeerById 函数不再和事件对象捆绑在一起，也就扩大了它的适用范围</p>
+</blockquote>
+<ul>
+<li>特权函数</li>
+</ul>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var Public = function () &#123;</span><br><span class="line">   var<span class="built_in"> secret </span>= 3;</span><br><span class="line">   this.privilegedGetter = function () &#123;</span><br><span class="line">     return secret</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> var o = new Public();</span><br><span class="line"> var data = o.privilegedGetter();</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>利用桥接函数来实现公共成员对私有成员的访问和操作 详见<a href="http://xhui.top/2018/12/10/JS设计模式-3-封装/" target="_blank" rel="noopener">封装</a></p>
+</blockquote>
+<ul>
+<li>连接多个类</li>
+</ul>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> class1 = <span class="function"><span class="keyword">function</span> <span class="params">(a,b,c)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.a = a;</span><br><span class="line">  <span class="keyword">this</span>.b = b;</span><br><span class="line">  <span class="keyword">this</span>.c = c;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> class2 = <span class="function"><span class="keyword">function</span> <span class="params">(d)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.d = d</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> BridgeClass = <span class="function"><span class="keyword">function</span> <span class="params">(a,b,c,d)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.one = <span class="keyword">new</span> class1(a,b,c);</span><br><span class="line">  <span class="keyword">this</span>.two = <span class="keyword">new</span> clsaa2(d);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这看起来很像适配器，但是本例中实际上并没有客户系统要求提供数据，它只不过是用来接纳数据并转发给责任方的一种辅助性手段。<br>有人可能会觉得这个桥接类实际上就是一个门面类。但是这里与门面类不同，使用桥接模式是为了让 class1 和 class2 能够独立于 BrigeClass 而发生改变。</p>
+</blockquote>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><blockquote>
+<p>桥接模式主要的作用是将抽象与其实现隔离开来，以便二者独立变化，互不影响。<br>桥接模式的好处就在于能够独立管理你项目的各个组成部分，可以促进代码的模块化，促成更简洁的实现并提高抽象的灵活性。<br>只有某一处调用的函数如果用桥接的话，代码就会变得累赘了。而且增加了函数的调用，可能会对性能造成一些影响。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="//xhui.top/2018/12/19/JS设计模式-7-桥接模式/" data-id="clwj7c8d5000jcmdiz0rn3ykj"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS设计模式/">JS设计模式</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2018/12/20/JS设计模式-8-组合模式/" class="article-nav-link">
+        <strong class="article-nav-caption">前一篇</strong>
+        <div class="article-nav-title">
+          
+            JS设计模式---8.组合模式
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2018/12/18/JS设计模式-6-工厂模式/" class="article-nav-link">
+        <strong class="article-nav-caption">后一篇</strong>
+        <div class="article-nav-title">JS设计模式---6.工厂模式</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: 'e238813be5ede70edbe4',
+      clientSecret: '8a1c133e698954649de728ddaf86cd2a1a977f9b',
+      repo: 'xhuishen.github.io',
+      owner: 'xhuishen',
+      admin: ['xhuishen'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2024 一点儿都不慌</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <!-- <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li> -->
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/logo.png" alt="一点儿都不慌"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">首页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+    <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/snap.svg-min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>

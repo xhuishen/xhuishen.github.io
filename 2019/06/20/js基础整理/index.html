@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="xhui Blog, 博客 , 技术博客 , 前端,个人博客">
+  
+  
+    <meta name="description" content="梦想什么时候开始都不晚。">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    js基础整理 |
+    
+    一点儿都不慌</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-js基础整理" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      js基础整理
+    </h1>
+  
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/06/20/js基础整理/" class="article-date">
+  <time datetime="2019-06-19T16:00:00.000Z" itemprop="datePublished">2019-06-20</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <h1 id="1-概念类"><a href="#1-概念类" class="headerlink" title="1 概念类"></a>1 概念类</h1><ul>
+<li>数据类型</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">基本数据类型：<span class="built_in">Number</span> <span class="built_in">String</span> Null <span class="built_in">Boolean</span> Undefind <span class="built_in">Symbol</span></span><br><span class="line">引用数据类型：<span class="built_in">Object</span></span><br></pre></td></tr></table></figure>
+ <a id="more"></a>
+<ul>
+<li>内置函数</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OBject <span class="built_in">Array</span> <span class="built_in">Boolean</span> <span class="built_in">Number</span> Srting  <span class="built_in">Function</span> <span class="built_in">Date</span> <span class="built_in">RegExp</span> <span class="built_in">Error</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>this 的使用场景</li>
+</ul>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">在构造函数中使用 ==<span class="function">=&gt;</span> 构造函数本身</span><br><span class="line">作为对象属性时使用 ==<span class="function">=&gt;</span> 调用属性的对象</span><br><span class="line">作为普通函数时使用 ==<span class="function">=&gt;</span>  <span class="built_in">window</span></span><br><span class="line">call，apply，bind ==<span class="function">=&gt;</span> 执行的第一个参数</span><br></pre></td></tr></table></figure>
+<ul>
+<li>同步和异步的区别并举例</li>
+</ul>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">同步会阻塞代码，异步不会  alert是同步  <span class="built_in">setTimeout</span>是异步</span><br></pre></td></tr></table></figure>
+<ul>
+<li>原型和原型链</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">原型： js中的对象分为两种，普通对象<span class="built_in">Object</span>和函数对象<span class="built_in">Function</span></span><br><span class="line">prototype就是函数对象的原型</span><br><span class="line">原型对象的值实际上就是在函数创建的时候,创建了一个它的实例对象</span><br><span class="line">并赋值给它的prototype</span><br><span class="line">原型链：原型组成的链。对象的_proto_属性指向它的原型，它的原型</span><br><span class="line">也是一个对象，也有_proto_属性，原型的_proto_又指向原型的原型，</span><br><span class="line">就这样可以一直通过__proto__向上找，这就是原型链，尽头是<span class="built_in">Object</span></span><br><span class="line">的原型。</span><br><span class="line"><span class="built_in">Object</span>的原型是<span class="keyword">null</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>闭包</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">闭包是能够读取到其他函数内部变量的函数，也可以理解成定义在一个函数内部的函数</span><br></pre></td></tr></table></figure>
+<ul>
+<li>同源策略(跨域)</li>
+</ul>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">跨域是什么：实际上就是一个网站不能执行其他网站上的网址，是由浏览器同源策略造成的，是浏览器对<span class="keyword">js施加的安全限制</span></span><br><span class="line"><span class="keyword">所谓同源，实际上是指域名，协议，端口都相同</span></span><br><span class="line"><span class="keyword">也就是说当，域名或者协议，或者端口不同的时候，就是跨域</span></span><br></pre></td></tr></table></figure>
+<p>-</p>
+<p>#2 常用</p>
+<ul>
+<li>列举三种强制类型转换和两种隐式类型转换</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">parseInt</span>(),<span class="built_in">parseFloat</span>(),<span class="built_in">Number</span>()  <span class="comment">//强制</span></span><br><span class="line">==,!!                             <span class="comment">//隐式</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>阻止冒泡默认</li>
+</ul>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">e</span><span class="selector-class">.preventDefault</span>()    <span class="comment">//默认</span></span><br><span class="line"><span class="selector-tag">e</span><span class="selector-class">.stopPropagation</span>()  <span class="comment">//冒泡</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>==和===区别</li>
+</ul>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">== 会自动转换类型 === 不会</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>null 和 undefind 的区别</li>
+</ul>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">null</span>是表示一个空的对象，转为数值为<span class="number">0</span>，undefind表示一个空的原始值，转为数值为NAN</span><br><span class="line">undefind指本该有一个值，但却并有定义，<span class="literal">null</span>表示没有对象，不应该有值</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ajax 请求</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">创建一个xhr对象 <span class="keyword">var</span> xhr = <span class="keyword">new</span> XmlHttpRequest()</span><br><span class="line">判断就绪状态为<span class="number">4</span>时执行代码</span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(xhr.readyState == <span class="number">4</span>)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(responseText);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">创建请求 xhr.open(<span class="string">'get'</span>,<span class="string">'url'</span>,<span class="literal">true</span>)</span><br><span class="line">发送请求 xhr.send(<span class="literal">null</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>cookie localStorage sessionStorage</li>
+</ul>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 与服务器的交互</span><br><span class="line">cookie数据始终在同源的<span class="keyword">http</span>请求中携带（即使不需要），即cookie在浏览器和服务器间来回传递。</span><br><span class="line">而sessionStorage和localStorage不会自动把数据发给服务器，仅在本地保存。cookie数据还有路径（path）的概念，可以限制cookie只属于某个路径下。</span><br><span class="line">// 存储大小限制也不同，</span><br><span class="line">cookie数据不能超过<span class="number">4</span>k，同时因为每次<span class="keyword">http</span>请求都会携带cookie，所以cookie只适合保存很小的数据，如会话标识。</span><br><span class="line">sessionStorage和localStorage 虽然也有存储大小的限制，但比cookie大得多，可以达到<span class="number">5</span>M或更大。</span><br><span class="line">// 数据有效期不同，</span><br><span class="line">sessionStorage：仅在当前浏览器窗口关闭前有效，自然也就不可能持久保持；</span><br><span class="line">localStorage：始终有效，窗口或浏览器关闭也一直保存，因此用作持久数据；</span><br><span class="line">cookie只在设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭。</span><br><span class="line">// 作用域不同</span><br><span class="line">sessionStorage不在不同的浏览器窗口中共享，即使是同一个页面；</span><br><span class="line">localStorage 在所有同源窗口中都是共享的；</span><br><span class="line">cookie也是在所有同源窗口中都是共享的。</span><br></pre></td></tr></table></figure>
+<ul>
+<li>数组去重</li>
+</ul>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">//最简单去重  (用indexof查询)</span><br><span class="line"> function (<span class="built_in">array</span>)&#123;</span><br><span class="line">    <span class="built_in">var</span> temp = [];</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">var</span> i=<span class="number">0</span>;i&lt;<span class="built_in">array</span>.<span class="built_in">length</span>;i++)&#123;</span><br><span class="line">       <span class="keyword">if</span>(temp.indexOf(<span class="built_in">array</span>[i]) == -<span class="number">1</span>)&#123;</span><br><span class="line">        temp.<span class="built_in">push</span>(<span class="built_in">array</span>[i]);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="built_in">return</span> temp;</span><br><span class="line">&#125;</span><br><span class="line">//原数组操作 (<span class="built_in">splice</span>方法)</span><br><span class="line"> funttion (arr)&#123;</span><br><span class="line">   <span class="built_in">let</span> <span class="built_in">length</span> = arr.<span class="built_in">length</span>;</span><br><span class="line">   <span class="keyword">for</span>(<span class="built_in">var</span> i = <span class="number">0</span>;i&lt;<span class="built_in">length</span>;i++)&#123;</span><br><span class="line">       <span class="keyword">for</span>(<span class="built_in">var</span> j=i+<span class="number">1</span>;j&lt;<span class="built_in">length</span>;j++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(arr[i] === arr[j])&#123;</span><br><span class="line">         arr.<span class="built_in">splice</span>(j,<span class="number">1</span>);</span><br><span class="line">         <span class="built_in">length</span> -- ;</span><br><span class="line">         j --;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 对象属性</span><br><span class="line">function (arr)&#123;</span><br><span class="line"><span class="built_in">let</span> obj = &#123;&#125;, res = []</span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">let</span> i = <span class="number">0</span>;i &lt; arr.<span class="built_in">length</span>;i++)&#123;</span><br><span class="line">  <span class="keyword">if</span>(!obj[arr[i]])&#123;</span><br><span class="line">    obj[arr[i]] = <span class="number">1</span>;</span><br><span class="line">    res.<span class="built_in">push</span>(arr[i]);</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line">// es6 Set方法</span><br><span class="line"><span class="built_in">let</span> arr = [<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="built_in">let</span> resultArr = [...<span class="built_in">new</span> Set(arr)]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取字符串出现最多的值及次数</li>
+</ul>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span><span class="params">(str)</span>&#123;</span></span><br><span class="line">  var obj = &#123;&#125;;</span><br><span class="line">  var maxn = <span class="number">-1</span>;</span><br><span class="line">  var letter;</span><br><span class="line">  <span class="keyword">for</span>(var <span class="built_in">i</span> = <span class="number">0</span>; <span class="built_in">i</span> &lt; str.<span class="built_in">length</span>; <span class="built_in">i</span>++) &#123;</span><br><span class="line">    <span class="keyword">if</span>(obj[s[<span class="built_in">i</span>]]) &#123;</span><br><span class="line">      obj[s[<span class="built_in">i</span>]]++;</span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">     obj[s[<span class="built_in">i</span>]] = <span class="number">1</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">if</span>(obj[s[<span class="built_in">i</span>]] &gt; maxn) &#123;</span><br><span class="line">       maxn = obj[s[<span class="built_in">i</span>]];</span><br><span class="line">       letter = s[<span class="built_in">i</span>];</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> console.<span class="built_in">log</span>(letter:maxn)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ul 中含有多个 li 元素，点击 li 分别弹出对应的序号</li>
+</ul>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// html</span></span><br><span class="line"> &lt;ul&gt;</span><br><span class="line">    &lt;<span class="keyword">li</span>&gt;a&lt;/<span class="keyword">li</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">li</span>&gt;a&lt;/<span class="keyword">li</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">li</span>&gt;a&lt;/<span class="keyword">li</span>&gt;</span><br><span class="line">    &lt;<span class="keyword">li</span>&gt;a&lt;/<span class="keyword">li</span>&gt;</span><br><span class="line"> &lt;/ul&gt;</span><br><span class="line"><span class="comment">//js</span></span><br><span class="line"> let <span class="keyword">lis</span> = document.getElementsByTagName('<span class="keyword">li</span>')</span><br><span class="line"><span class="comment">//dom污染</span></span><br><span class="line">   <span class="keyword">for</span>(<span class="keyword">var</span> i = 0, length = <span class="keyword">lis</span>.length; i &lt; length; i++) &#123;</span><br><span class="line">      <span class="keyword">lis</span>[i].index = i;</span><br><span class="line">      <span class="keyword">lis</span>[i].onclick = function() &#123;</span><br><span class="line">        alert(this.index);</span><br><span class="line">      &#125;;</span><br><span class="line"><span class="comment">// 闭包</span></span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">var</span> i=0;i&lt;aLi.length;i++)&#123;</span><br><span class="line">           (function(i)&#123;</span><br><span class="line">              <span class="keyword">lis</span>[i].onclick = function()&#123;</span><br><span class="line">                    alert(i);</span><br><span class="line">              &#125;;</span><br><span class="line">            &#125;)(i);</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>解析 url 参数</li>
+</ul>
+<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// split</span></span><br><span class="line">parseQueryString(<span class="built_in">url</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> result = [];</span><br><span class="line">    <span class="keyword">var</span> query = <span class="built_in">url</span>.split(<span class="string">"?"</span>)[<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">var</span> queryArr = query.split(<span class="string">"&amp;"</span>);</span><br><span class="line">    queryArr.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line">        <span class="keyword">var</span> value = item.split(<span class="string">"="</span>)[<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">var</span> key = item.split(<span class="string">"="</span>)[<span class="number">0</span>];</span><br><span class="line">        obj[key] = value;</span><br><span class="line">        result.push(obj);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//正则</span></span><br><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/[^&amp;=?]+=[^&amp;]*/g</span>;</span><br><span class="line"><span class="keyword">var</span> res = <span class="built_in">url</span>.match(reg);</span><br><span class="line"><span class="comment">// 获取具体的值</span></span><br><span class="line"><span class="keyword">var</span> getParamValue = <span class="function"><span class="keyword">function</span>(<span class="params">url,key</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> regex = <span class="keyword">new</span> <span class="built_in">RegExp</span>(key+<span class="string">"=([^&amp;]*)"</span>,<span class="string">"i"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">url</span>.match(regex)[<span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>PxToRem</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">(<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span></span><br><span class="line"><span class="javascript"><span class="built_in">document</span>.addEventListener(<span class="string">'DOMContentLoaded'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">var</span> html = <span class="built_in">document</span>.documentElement;</span></span><br><span class="line"><span class="actionscript">  <span class="keyword">var</span> windowWidth = html.clientWidth;</span></span><br><span class="line">  if(windowWidth &gt; 640) windowWidth = 640;</span><br><span class="line"><span class="handlebars"><span class="xml">  if(windowWidth <span class="tag">&lt; <span class="attr">320</span>) <span class="attr">windowWidth</span> = <span class="string">320;</span></span></span></span></span><br><span class="line"><span class="actionscript">  html.style.fontSize = windowWidth / <span class="number">7.5</span> + <span class="string">'px'</span>;</span></span><br><span class="line"><span class="actionscript">&#125;, <span class="literal">false</span>);</span></span><br><span class="line">&#125;)();</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>判断数据类型</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span></span><br><span class="line"><span class="keyword">instanceof</span></span><br><span class="line"><span class="built_in">Object</span>.prototype.toString.call</span><br><span class="line"><span class="comment">//封装</span></span><br><span class="line"><span class="keyword">var</span> Type = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                <span class="keyword">var</span> type = &#123;&#125;;</span><br><span class="line">                <span class="keyword">var</span> typeArr = [<span class="string">'String'</span>, <span class="string">'Object'</span>, <span class="string">'Number'</span>, <span class="string">'Array'</span>,<span class="string">'Undefined'</span>, <span class="string">'Function'</span>, <span class="string">'Null'</span>, <span class="string">'Symbol'</span>];</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; typeArr.length; i++) &#123;</span><br><span class="line">                    (<span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">                        type[<span class="string">'Is'</span> + name] = <span class="function"><span class="keyword">function</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">                            <span class="keyword">return</span> <span class="built_in">Object</span>.prototype.toString.call(obj) == <span class="string">'[object '</span> + name + <span class="string">']'</span>;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;)(typeArr[i]);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> type;</span><br><span class="line">&#125;)();</span><br><span class="line"><span class="comment">//调用方法</span></span><br><span class="line">Type.IsFunction(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;)      Type.IsObject(&#123;&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>判断数组内包含某个元素</li>
+</ul>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ARR</span>.includes(<span class="variable">$&#123;ITEM&#125;</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>深拷贝</li>
+</ul>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 万金油方式</span></span><br><span class="line"><span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(XXXX))</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deepClone</span> (<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (obj === <span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">null</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> obj !== <span class="string">'object'</span>) <span class="keyword">return</span> obj</span><br><span class="line">    <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> <span class="built_in">RegExp</span>) <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">RegExp</span>(obj)</span><br><span class="line">    <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> <span class="built_in">Date</span>) <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Date</span>(obj)</span><br><span class="line">    <span class="keyword">let</span> newObj = <span class="keyword">new</span> obj.<span class="keyword">constructor</span></span><br><span class="line">    for (<span class="params"><span class="keyword">let</span> key <span class="keyword">in</span> obj</span>) &#123;</span><br><span class="line">        newObj[key] = deepClone(obj[key])</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> newObj</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="//xhui.top/2019/06/20/js基础整理/" data-id="clwj7c8d9000tcmdii9a5woug"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2019/07/24/随机生成验证码/" class="article-nav-link">
+        <strong class="article-nav-caption">前一篇</strong>
+        <div class="article-nav-title">
+          
+            随机生成验证码 兼容ie
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2019/05/14/Http请求与响应/" class="article-nav-link">
+        <strong class="article-nav-caption">后一篇</strong>
+        <div class="article-nav-title">Http请求与响应</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: 'e238813be5ede70edbe4',
+      clientSecret: '8a1c133e698954649de728ddaf86cd2a1a977f9b',
+      repo: 'xhuishen.github.io',
+      owner: 'xhuishen',
+      admin: ['xhuishen'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2024 一点儿都不慌</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <!-- <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li> -->
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/logo.png" alt="一点儿都不慌"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">首页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+    <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/snap.svg-min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>

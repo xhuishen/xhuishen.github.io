@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="xhui Blog, 博客 , 技术博客 , 前端,个人博客">
+  
+  
+    <meta name="description" content="梦想什么时候开始都不晚。">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    初探NUXT(ssr) |
+    
+    一点儿都不慌</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-初探NUXT(ssr)" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      初探NUXT(ssr)
+    </h1>
+  
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/11/21/初探NUXT(ssr)/" class="article-date">
+  <time datetime="2019-11-20T16:00:00.000Z" itemprop="datePublished">2019-11-21</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <blockquote>
+<p>项目需要 seo 及兼容手机端,百度大法后选定了 nuxt,记录一下</p>
+</blockquote>
+<h3 id="下载安装"><a href="#下载安装" class="headerlink" title="下载安装"></a>下载安装</h3><a id="more"></a>
+<blockquote>
+<p>百度很多就不写了</p>
+</blockquote>
+<h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// nuxt 会自动生成路由  主要提一下动态路由</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 目录结构为</span></span><br><span class="line"></span><br><span class="line">pages/</span><br><span class="line">--| <span class="variable">_slug</span>/</span><br><span class="line">-----| comments.vue</span><br><span class="line">-----| index.vue</span><br><span class="line">--| users/</span><br><span class="line">-----| <span class="variable">_id</span>.vue</span><br><span class="line">--| index.vue</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成的路由配置为</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">router: &#123;</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">name</span>: <span class="string">'index'</span>,</span><br><span class="line">      path: <span class="string">'/'</span>,</span><br><span class="line">      component: <span class="string">'pages/index.vue'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">name</span>: <span class="string">'users-id'</span>,</span><br><span class="line">      path: <span class="string">'/users/:id?'</span>,</span><br><span class="line">      component: <span class="string">'pages/users/_id.vue'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">name</span>: <span class="string">'slug'</span>,</span><br><span class="line">      path: <span class="string">'/:slug'</span>,</span><br><span class="line">      component: <span class="string">'pages/_slug/index.vue'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">name</span>: <span class="string">'slug-comments'</span>,</span><br><span class="line">      path: <span class="string">'/:slug/comments'</span>,</span><br><span class="line">      component: <span class="string">'pages/_slug/comments.vue'</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以在组件内检验参数</span></span><br><span class="line"></span><br><span class="line">export <span class="keyword">default</span> &#123;</span><br><span class="line">  validate (&#123; <span class="built_in">params</span> &#125;) &#123;</span><br><span class="line">    <span class="comment">// 必须是number类型</span></span><br><span class="line">    return /^\d+$/.test(<span class="built_in">params</span>.id)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 举个栗子 使用iview</span></span><br><span class="line"><span class="comment">// 在plugins目录创建iview.js  代码入下</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> iView <span class="keyword">from</span> <span class="string">'iview'</span></span><br><span class="line"><span class="keyword">import</span> locale <span class="keyword">from</span> <span class="string">'iview/dist/locale/en-US'</span> <span class="comment">// Change locale, check node_modules/iview/dist/locale</span></span><br><span class="line"></span><br><span class="line">Vue.use(iView, &#123;</span><br><span class="line">  locale</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">Vue.prototype.$Message.config(&#123;</span><br><span class="line">  top: <span class="number">300</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// vuex刷新时需要初始化  我这边是用插件来设置</span></span><br><span class="line"><span class="comment">// initStore</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; localStore &#125; <span class="keyword">from</span> <span class="string">'@/utils/tools'</span></span><br><span class="line"><span class="keyword">import</span> &#123; getStore &#125; <span class="keyword">from</span> <span class="string">'@/utils/storage'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span>(<span class="params">&#123; $axios, store &#125;</span>) </span>&#123;        <span class="comment">//这里的参数为Context上下文对象</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">JSON</span>.stringify(store.state.info) === <span class="string">'&#123;&#125;'</span>) &#123;</span><br><span class="line">    $axios.post(<span class="string">'/api/common/info'</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">      store.commit(<span class="string">'SETINFO'</span>, res.data)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (getStore(<span class="string">'token'</span>)) &#123;</span><br><span class="line">    store.dispatch(<span class="string">'changeLogin'</span>, &#123;</span><br><span class="line">      state: <span class="literal">true</span>,</span><br><span class="line">      info: <span class="built_in">JSON</span>.parse(getStore(<span class="string">'userInfo'</span>)) || &#123;&#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    $axios.post(<span class="string">'/api/common/history'</span>)</span><br><span class="line">    .then(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">      store.commit(<span class="string">'GETHSITORY'</span>,res.data)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    store.dispatch(<span class="string">'changeLogin'</span>, &#123;</span><br><span class="line">      state: <span class="literal">false</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (localStore.get(<span class="string">'searchParams'</span>)) &#123;</span><br><span class="line">    store.commit(<span class="string">'SETSEARCH'</span>, localStore.get(<span class="string">'searchParams'</span>))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// nuxt.config.js</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  plugins:[</span><br><span class="line">    &#123;</span><br><span class="line">      &#123;</span><br><span class="line">        src: <span class="string">'@/plugins/iview'</span>,</span><br><span class="line">        ssr: <span class="literal">true</span>     <span class="comment">//ssr默认为true 表示在服务端也会渲染</span></span><br><span class="line">      &#125;,</span><br><span class="line">       &#123;</span><br><span class="line">        src: <span class="string">'@/plugins/initStore'</span>,</span><br><span class="line">        ssr: <span class="literal">false</span>   <span class="comment">//ssr为false时只在客户端渲染  需要用到window对象时就需要设置</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="兼容移动端配置"><a href="#兼容移动端配置" class="headerlink" title="兼容移动端配置"></a>兼容移动端配置</h3><blockquote>
+<p>由于 PC 端需要兼容 ie9 并不能通用 所以我使用了两套代码 通过中间件来切换</p>
+</blockquote>
+<figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 在middleware文件下创建一个device.js  每次切换路由时会先进入中间件</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; deviceType &#125; from <span class="string">"~/utils/tools"</span>;</span><br><span class="line"><span class="comment">// deviceType为判断客户端的方法</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span>(<span class="keyword">context</span>) &#123;</span><br><span class="line">  <span class="keyword">context</span><span class="variable">.userAgent</span> = process<span class="variable">.server</span></span><br><span class="line">    ? <span class="keyword">context</span><span class="variable">.req</span><span class="variable">.headers</span>[<span class="string">"user-agent"</span>]</span><br><span class="line">    : navigator<span class="variable">.userAgent</span>;</span><br><span class="line">  <span class="comment">// 给全局上下文添加一个属性来保存我们返回的匹配信息</span></span><br><span class="line">  <span class="comment">// console.log('tag', context)</span></span><br><span class="line">  <span class="keyword">context</span><span class="variable">.deviceType</span> = deviceType(<span class="keyword">context</span><span class="variable">.userAgent</span>);</span><br><span class="line">  <span class="comment">// 若是判断UA非移动端的,就在这里做处理了..</span></span><br><span class="line">  <span class="comment">// context.redirect(status,url) 这个可以重定向到外部网站</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">context</span><span class="variable">.deviceType</span><span class="variable">.type</span> === <span class="string">"pc"</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (/m[-]*[\w]*/g<span class="variable">.test</span>(<span class="keyword">context</span><span class="variable">.route</span><span class="variable">.name</span>)) &#123;</span><br><span class="line">      <span class="keyword">context</span><span class="variable">.redirect</span>(<span class="keyword">context</span><span class="variable">.route</span><span class="variable">.fullPath</span><span class="variable">.slice</span>(<span class="number">2</span>));  <span class="comment">// 转换url  /m/about 转为 /about</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!/m[-]*[\w]*/g<span class="variable">.test</span>(<span class="keyword">context</span><span class="variable">.route</span><span class="variable">.name</span>)) &#123;</span><br><span class="line">      <span class="comment">//   //redirect path from '/&#123;PATH&#125;' to '/m /&#123;PATH&#125;';</span></span><br><span class="line">      <span class="keyword">context</span><span class="variable">.redirect</span>(<span class="string">"/m"</span> + <span class="keyword">context</span><span class="variable">.route</span><span class="variable">.fullPath</span>); <span class="comment">// 转换url  /about 转为 /m/about</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// nuxt.config.js</span></span><br><span class="line">  router: &#123;</span><br><span class="line">    mode: 'history',</span><br><span class="line">    middleware: [<span class="number">'de</span>vice'],</span><br><span class="line">    fallback: true</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//tools.js</span></span><br><span class="line"> <span class="keyword">const</span> deviceType = <span class="function"><span class="keyword">function</span> (<span class="params">UA</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">const</span> reg = <span class="regexp">/(Android|webOS|iPhone|iPod|tablet|BlackBerry|Mobile)/i</span>;</span><br><span class="line">  <span class="keyword">if</span> (reg.test(UA)) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="keyword">type</span>: <span class="string">"mobile"</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="keyword">type</span>: <span class="string">"pc"</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">  deviceType</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// axios</span></span><br><span class="line"> <span class="attribute">modules</span>: [</span><br><span class="line">   <span class="comment">// Doc: https://axios.nuxtjs.org/usage</span></span><br><span class="line">   <span class="string">'@nuxtjs/axios'</span></span><br><span class="line">   <span class="comment">// '@nuxtjs/proxy'</span></span><br><span class="line"> ],</span><br><span class="line"> <span class="comment">/*</span></span><br><span class="line"><span class="comment">  ** Axios module configuration</span></span><br><span class="line"><span class="comment">  ** See https://axios.nuxtjs.org/options</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line"> <span class="attribute">axios</span>: &#123;</span><br><span class="line">   <span class="attribute">proxy</span>: true,</span><br><span class="line">   <span class="comment">// baseUrl: 'https://api.kuaimaidian.com'</span></span><br><span class="line"> &#125;,</span><br><span class="line"> <span class="attribute">proxy</span>: &#123;</span><br><span class="line">   <span class="string">'/api'</span>: &#123;</span><br><span class="line">     <span class="comment">// target: 'https://api.kuaimaidian.com',</span></span><br><span class="line">     <span class="attribute">target</span>: <span class="string">'http://192.168.2.17'</span>,</span><br><span class="line">     <span class="attribute">pathRewrite</span>: &#123;</span><br><span class="line">       <span class="string">'^/api'</span>: <span class="string">'/api'</span></span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;,</span><br></pre></td></tr></table></figure>
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><blockquote>
+<p>npm build 后将.nuxt,static,package.json,nuxt.config.js 这 4 个文件夹放到服务器目录文件下 或者直接在服务器上把代码拉下来 build,然后 npm i 安装依赖 ，最后 npm start 运行即可<br>这里有个地方要注意 我们需要在 nuxt.config.js 加上这行代码 ，不然的话访问不了</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span> <span class="string">&#123;</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">3000</span><span class="string">,</span> <span class="string">//</span> <span class="attr">default:</span> <span class="number">3000</span></span><br><span class="line">  <span class="attr">host:</span> <span class="string">"0.0.0.0"</span> <span class="string">//</span> <span class="attr">default:</span> <span class="string">localhost</span></span><br><span class="line"><span class="string">&#125;,</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>nginx 配置</li>
+</ul>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">upstream</span> nodenuxt &#123;</span><br><span class="line">  <span class="attribute">server</span> <span class="number">127.0.0.1:3000</span>; <span class="comment">#nuxt项目 监听端口</span></span><br><span class="line">  <span class="attribute">keepalive</span> <span class="number">64</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">  <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">  <span class="attribute">server_name</span> mysite.com;</span><br><span class="line">  <span class="attribute">location</span> / &#123;</span><br><span class="line">    <span class="attribute">proxy_http_version</span> <span class="number">1</span>.<span class="number">1</span>;</span><br><span class="line">    <span class="attribute">proxy_set_header</span> Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">    <span class="attribute">proxy_set_header</span> Connection <span class="string">"upgrade"</span>;</span><br><span class="line">    <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">    <span class="attribute">proxy_set_header</span> X-Nginx-Proxy <span class="literal">true</span>;</span><br><span class="line">    <span class="attribute">proxy_cache_bypass</span> <span class="variable">$http_upgrade</span>;</span><br><span class="line">    <span class="attribute">proxy_pass</span> http://nodenuxt; <span class="comment">#反向代理</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>最后装 pm2 进程守护来启动 node 就 ok 了<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">// pm2 常用命令</span><br><span class="line"> </span><br><span class="line">$ pm2 <span class="keyword">start</span> npm <span class="comment">--name "myapp" -- run start   // 启动名称为myapp的node程序</span></span><br><span class="line"></span><br><span class="line">$ pm2 <span class="keyword">start</span> app.js <span class="comment"># 启动app.js应用程序</span></span><br><span class="line">$ pm2 <span class="keyword">start</span> app.js <span class="comment">--name="api" # 启动应用程序并命名为 "api"</span></span><br><span class="line">$ pm2 <span class="keyword">start</span> app.js <span class="comment">--watch # 当文件变化时自动重启应用</span></span><br><span class="line">$ pm2 <span class="keyword">start</span> script.sh <span class="comment"># 启动 bash 脚本</span></span><br><span class="line"></span><br><span class="line">$ pm2 <span class="keyword">list</span> <span class="comment"># 列表 PM2 启动的所有的应用程序</span></span><br><span class="line">$ pm2 monit <span class="comment"># 显示每个应用程序的CPU和内存占用情况</span></span><br><span class="line">$ pm2 <span class="keyword">show</span> [app-<span class="keyword">name</span>] <span class="comment"># 显示应用程序的所有信息</span></span><br><span class="line"></span><br><span class="line">$ pm2 <span class="keyword">logs</span> <span class="comment"># 显示所有应用程序的日志</span></span><br><span class="line">$ pm2 <span class="keyword">logs</span> [app-<span class="keyword">name</span>] <span class="comment"># 显示指定应用程序的日志</span></span><br><span class="line">pm2 <span class="keyword">flush</span></span><br><span class="line"></span><br><span class="line">$ pm2 <span class="keyword">stop</span> <span class="keyword">all</span> <span class="comment"># 停止所有的应用程序</span></span><br><span class="line">$ pm2 <span class="keyword">stop</span> <span class="number">0</span> <span class="comment"># 停止 id为 0的指定应用程序</span></span><br><span class="line">$ pm2 restart <span class="keyword">all</span> <span class="comment"># 重启所有应用</span></span><br><span class="line">$ pm2 reload <span class="keyword">all</span> <span class="comment"># 重启 cluster mode下的所有应用</span></span><br><span class="line">$ pm2 gracefulReload <span class="keyword">all</span> <span class="comment"># Graceful reload all apps in cluster mode</span></span><br><span class="line">$ pm2 <span class="keyword">delete</span> <span class="keyword">all</span> <span class="comment"># 关闭并删除所有应用</span></span><br><span class="line">$ pm2 <span class="keyword">delete</span> <span class="number">0</span> <span class="comment"># 删除指定应用 id 0</span></span><br><span class="line">$ pm2 scale api <span class="number">10</span> <span class="comment"># 把名字叫api的应用扩展到10个实例</span></span><br><span class="line">$ pm2 <span class="keyword">reset</span> [app-<span class="keyword">name</span>] <span class="comment"># 重置重启数量</span></span><br><span class="line"></span><br><span class="line">$ pm2 <span class="keyword">startup</span> <span class="comment"># 创建开机自启动命令</span></span><br><span class="line">$ pm2 <span class="keyword">save</span> <span class="comment"># 保存当前应用列表</span></span><br><span class="line">$ pm2 resurrect <span class="comment"># 重新加载保存的应用列表</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="//xhui.top/2019/11/21/初探NUXT(ssr)/" data-id="clwj7c8db000ycmdinv522awa"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2020/02/10/继承/" class="article-nav-link">
+        <strong class="article-nav-caption">前一篇</strong>
+        <div class="article-nav-title">
+          
+            继承
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2019/11/15/小程序&&Taro记录/" class="article-nav-link">
+        <strong class="article-nav-caption">后一篇</strong>
+        <div class="article-nav-title">小程序&amp;&amp;Taro记录</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: 'e238813be5ede70edbe4',
+      clientSecret: '8a1c133e698954649de728ddaf86cd2a1a977f9b',
+      repo: 'xhuishen.github.io',
+      owner: 'xhuishen',
+      admin: ['xhuishen'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2024 一点儿都不慌</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <!-- <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li> -->
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/logo.png" alt="一点儿都不慌"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">首页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+    <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/snap.svg-min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>

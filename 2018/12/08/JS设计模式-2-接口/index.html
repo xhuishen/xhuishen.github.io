@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="xhui Blog, 博客 , 技术博客 , 前端,个人博客">
+  
+  
+    <meta name="description" content="梦想什么时候开始都不晚。">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    JS设计模式---2.接口 |
+    
+    一点儿都不慌</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-JS设计模式-2-接口" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS设计模式---2.接口
+    </h1>
+  
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2018/12/08/JS设计模式-2-接口/" class="article-date">
+  <time datetime="2018-12-07T16:00:00.000Z" itemprop="datePublished">2018-12-08</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <h3 id="什么是接口"><a href="#什么是接口" class="headerlink" title="什么是接口"></a>什么是接口</h3><p>接口提供了一种用以说明一个对象应该具有哪些方法的手段。</p>
+ <a id="more"></a>
+<h3 id="接口之利"><a href="#接口之利" class="headerlink" title="接口之利"></a>接口之利</h3><ul>
+<li>接口可以告诉一个程序员一个类实现了哪些方法，从而帮助其使用这个类。</li>
+<li>接口还有助于稳定不同类之间的通信方式。</li>
+</ul>
+<h3 id="接口之弊"><a href="#接口之弊" class="headerlink" title="接口之弊"></a>接口之弊</h3><ul>
+<li>接口的使用在一定程度上强化了类型的作用，这降低了语言的灵活性。</li>
+<li>JS 并没有提供对接口的内置支持，而试图模仿其他语言的内置功能总是会有一些风险</li>
+<li>JS 中任何实现接口的方法都会对性能造成一定影响，在某种程度上这得归咎于额外的方法调用的开销</li>
+<li>接口的使用最大的问题在于，无法强迫其他程序员遵守你定义的接口</li>
+</ul>
+<h3 id="模仿接口实现"><a href="#模仿接口实现" class="headerlink" title="模仿接口实现"></a>模仿接口实现</h3><ul>
+<li>用注释描述接口</li>
+</ul>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">  interface Composite &#123;</span><br><span class="line">     <span class="function"><span class="keyword">function</span> <span class="title">add</span><span class="params">(child)</span></span>;</span><br><span class="line">     <span class="function"><span class="keyword">function</span> <span class="title">remove</span><span class="params">(child)</span></span>;</span><br><span class="line">     <span class="function"><span class="keyword">function</span> <span class="title">getChild</span><span class="params">(child)</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">   interface FormItem &#123;</span><br><span class="line">     <span class="function"><span class="keyword">function</span> <span class="title">save</span><span class="params">(child)</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">*/</span><br><span class="line">var CompositeFrom = <span class="function"><span class="keyword">function</span><span class="params">(id,method,action)</span></span>&#123;</span><br><span class="line">   ...</span><br><span class="line">&#125;;</span><br><span class="line">CompositeFrom .prototype.add = <span class="function"><span class="keyword">function</span><span class="params">(child)</span></span>&#123;</span><br><span class="line"> ...</span><br><span class="line">&#125;;</span><br><span class="line">CompositeFrom .prototype.<span class="built_in">remove</span>= <span class="function"><span class="keyword">function</span><span class="params">(child)</span></span>&#123;</span><br><span class="line"> ...</span><br><span class="line">&#125;;</span><br><span class="line">CompositeFrom .prototype.getChild= <span class="function"><span class="keyword">function</span><span class="params">(child)</span></span>&#123;</span><br><span class="line"> ...</span><br><span class="line">&#125;;</span><br><span class="line">CompositeFrom .prototype.save= <span class="function"><span class="keyword">function</span><span class="params">(child)</span></span>&#123;</span><br><span class="line"> ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>这种做法易于实现，不需要额外的类或函数。可以提高代码的可重用性。</p>
+<p>它的缺点在于没有为确保 CompositeFrom 真正实现了的正确方法而进行检查，也不会抛出错误告诉程序员程序中有问题，所以对于测试和调试也没有什么帮助。</p>
+<ul>
+<li>属性检查模仿接口</li>
+</ul>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">  interface Composite &#123;</span></span><br><span class="line"><span class="comment">     function add(child);</span></span><br><span class="line"><span class="comment">     function remove(child);</span></span><br><span class="line"><span class="comment">     function getChild(child);</span></span><br><span class="line"><span class="comment">  &#125;</span></span><br><span class="line"><span class="comment">   interface FormItem &#123;</span></span><br><span class="line"><span class="comment">     function save(child);</span></span><br><span class="line"><span class="comment">  &#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">var</span> CompositeFrom = <span class="function"><span class="keyword">function</span><span class="params">(id,method,action)</span></span>&#123;</span><br><span class="line">  <span class="comment">//定义一个数组  存放将要实现的接口</span></span><br><span class="line">  <span class="keyword">this</span>.implementsInterface = [<span class="string">'Composite'</span>,<span class="string">'FormItem'</span>];</span><br><span class="line">  ...</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addForm</span><span class="params">(formInstance)</span></span>&#123;</span><br><span class="line">  <span class="comment">// 调用检查函数 如果存在未定义的接口 抛出错误</span></span><br><span class="line">  <span class="keyword">if</span>(!<span class="keyword">implements</span>(formInstance,<span class="string">'Composite'</span>,<span class="string">'FormItem'</span>))&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> Error(<span class="string">'Object does not implement a required interface'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">implements</span><span class="params">(object)</span></span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>;i&lt;argumements.length;i++)&#123;</span><br><span class="line">    <span class="comment">// 遍历参数  跳过第一个</span></span><br><span class="line">    <span class="keyword">var</span> interfaceName = argument[i]; <span class="comment">//接口名称</span></span><br><span class="line">    <span class="keyword">var</span> interfaceFound = <span class="literal">false</span> ; <span class="comment">//flag</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> j=<span class="number">0</span>;j&lt;object.implementsInterface.length;j++)&#123;</span><br><span class="line">      <span class="comment">// 遍历存放接口名称的数组</span></span><br><span class="line">      <span class="keyword">if</span>(implementsInterface[j] == interfaceName)&#123;</span><br><span class="line">        interfaceFound = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//  如果找到返回true  否则返回false</span></span><br><span class="line">    <span class="keyword">return</span> interfaceFound</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这种方法不仅对所实现的接口进行了注释说明，如果需要的接口不在一个类所宣称支持接口之内，它还会抛出一个错误，这样就可以强迫其它程序员声明这些接口。</p>
+<p>它的缺点在于你不能保证所声明的接口是否真正实现。所以会存在检查通过，而方法不存在的问题。</p>
+<ul>
+<li>鸭式辨型模仿接口</li>
+</ul>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Interface</span></span><br><span class="line"><span class="keyword">var</span> Composite = <span class="keyword">new</span> <span class="keyword">Interface</span>(<span class="string">'Composite'</span>,[<span class="string">'add'</span>,<span class="string">'remove'</span>,<span class="string">'getChild'</span>]);</span><br><span class="line"><span class="keyword">var</span> FormItem= <span class="keyword">new</span> <span class="keyword">Interface</span>(<span class="string">'FormItem'</span>,[<span class="string">'save'</span>]);</span><br><span class="line"><span class="comment">//CompositeForm 类</span></span><br><span class="line"><span class="keyword">var</span> CompositeForm= <span class="function"><span class="keyword">function</span><span class="params">(id,<span class="keyword">method</span>,action)</span><span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment"> ...</span></span></span><br><span class="line"><span class="function"><span class="comment">&#125;</span>;</span></span><br><span class="line">functiom addForm(formIntance)<span class="comment">&#123;</span></span><br><span class="line"><span class="comment">  // 辅助函数  如果引入未定义的接口会抛出错误</span></span><br><span class="line"><span class="comment">  ensureImplements(formIntance,Composite,FormItem);</span></span><br><span class="line"><span class="comment">  ...</span></span><br><span class="line"><span class="comment">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>这种方法不依赖于注释。其各个方面都是可以强制实施的。ensureImplements 函数至少需要两个参数，第一个参数是想要检查的对象，其余参数是据以对那个对象进行检查的接口。</p>
+<p>它的缺点在于，类并不声明自己实现了哪些接口，降低了代码的可重用性，也缺乏上面两种方法的自我描述性。它依赖于辅助类 Interface 和辅助函数 ensureImplements。</p>
+<h3 id="Interface-类的实现"><a href="#Interface-类的实现" class="headerlink" title="Interface 类的实现"></a>Interface 类的实现</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构造函数</span></span><br><span class="line"> <span class="keyword">var</span> Interface = <span class="function"><span class="keyword">function</span>(<span class="params">name,methods</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">arguments</span>.length != <span class="number">2</span>)&#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">`Interface constructor called with <span class="subst">$&#123;<span class="built_in">arguments</span>.length&#125;</span> arguments, but expcted 2.`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.methods = [];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i =<span class="number">0</span>;i&lt;methods.length;i++)&#123;</span><br><span class="line">      <span class="keyword">if</span>(<span class="keyword">typeof</span> methodsp[i] !== <span class="string">'string'</span>)&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"Interface  constructor expects method name to be passed in as a string"</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">this</span>.methods.push(methods[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 辅助函数</span></span><br><span class="line">Interface.ensureImplements = <span class="function"><span class="keyword">function</span>(<span class="params">object</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//  如果参数小于2个抛出错误</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">arguments</span>.length&lt;<span class="number">2</span>)&#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">`Function Interface.ensureImplements called with <span class="subst">$&#123;<span class="built_in">arguments</span>.length&#125;</span> arguments, but expected at least 2.`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>; i&lt;<span class="built_in">arguments</span>.length; i++)&#123;</span><br><span class="line">      <span class="keyword">var</span> <span class="keyword">interface</span> = arguments[i];</span><br><span class="line">      // 如果类的构造函数不是Interface 抛出错误</span><br><span class="line">      if(<span class="keyword">interface</span>.constructor !== Interface)&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"Function Interface.ensureImplements expects arguments two and above to be insterface of Interface"</span>)</span><br><span class="line">      &#125;</span><br><span class="line">       <span class="comment">// 遍历存放接口名称的数组</span></span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> j=<span class="number">0</span>;j&lt;<span class="keyword">interface</span>.methods.length;j++)&#123;</span><br><span class="line">        <span class="keyword">var</span> method = <span class="keyword">interface</span>.methods[j]</span><br><span class="line">        if(!object[method] || typeof method !== 'function')&#123;</span><br><span class="line">          <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">`Function Interface.ensureImplements: object does not implement the <span class="subst">$&#123;interface.name&#125;</span> interface.Method <span class="subst">$&#123;method&#125;</span> was not found`</span>)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="一个栗子"><a href="#一个栗子" class="headerlink" title="一个栗子"></a>一个栗子</h3><figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var DynamicMap =<span class="keyword">new</span> <span class="keyword">interface</span>(<span class="symbol">'DynamicMap</span>',[<span class="symbol">'centerOnPoint</span><span class="string">','</span>zoom<span class="string">','</span>draw']);</span><br><span class="line"><span class="keyword">function</span> <span class="title">displayRoute</span>(mapInterface) &#123;</span><br><span class="line">  interface.ensureImplements(mapInterface,DynamicMap);</span><br><span class="line">  mapInterface.centerOnPoint(<span class="number">12</span>,<span class="number">34</span>);</span><br><span class="line">  mapInterface.zoom(<span class="number">5</span>);</span><br><span class="line">  mapInterface.draw();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="//xhui.top/2018/12/08/JS设计模式-2-接口/" data-id="clwj7c8cx0008cmdidcaownpl"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS设计模式/">JS设计模式</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2018/12/10/JS设计模式-3-封装/" class="article-nav-link">
+        <strong class="article-nav-caption">前一篇</strong>
+        <div class="article-nav-title">
+          
+            JS设计模式---3.封装
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2018/12/07/JS设计模式-1-富有表现力的JS/" class="article-nav-link">
+        <strong class="article-nav-caption">后一篇</strong>
+        <div class="article-nav-title">JS设计模式---1.富有表现力的JS</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: 'e238813be5ede70edbe4',
+      clientSecret: '8a1c133e698954649de728ddaf86cd2a1a977f9b',
+      repo: 'xhuishen.github.io',
+      owner: 'xhuishen',
+      admin: ['xhuishen'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2024 一点儿都不慌</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <!-- <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li> -->
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/logo.png" alt="一点儿都不慌"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">首页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+    <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/snap.svg-min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>

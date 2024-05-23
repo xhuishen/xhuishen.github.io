@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="xhui Blog, 博客 , 技术博客 , 前端,个人博客">
+  
+  
+    <meta name="description" content="梦想什么时候开始都不晚。">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    使用hexo和github pages搭建个人博客 |
+    
+    一点儿都不慌</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-使用hexo和github-pages搭建个人博客" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用hexo和github pages搭建个人博客
+    </h1>
+  
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2018/11/06/使用hexo和github-pages搭建个人博客/" class="article-date">
+  <time datetime="2018-11-05T16:00:00.000Z" itemprop="datePublished">2018-11-06</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <p>服务器到期了，域名空着也没用，于是趁着空闲搭建一个基于 git 的博客</p>
+ <a id="more"></a>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>1.下载 node 和 git 不解释</p>
+<p>2.下载 hexo 命令如下图</p>
+<p><img src="https://s2.ax1x.com/2019/09/26/umPVqH.png" alt></p>
+<ol start="3">
+<li><p>找个自己看着顺眼的地方创建并初始化一个 hexo 如图</p>
+<p><img src="https://s2.ax1x.com/2019/09/26/umPPG6.png" alt="初始化"></p>
+</li>
+<li><p>下载依赖</p>
+<p><img src="https://s2.ax1x.com/2019/09/26/umPiRK.png" alt="下载依赖"></p>
+</li>
+<li><p>体验一下</p>
+<p><img src="https://s2.ax1x.com/2019/09/26/umPAMD.png" alt="本地运行"></p>
+<p>浏览器输入<a href="http://localhost:4000/即可访问" target="_blank" rel="noopener">http://localhost:4000/即可访问</a></p>
+</li>
+</ol>
+<h2 id="创建一个-github-pages-个人博客"><a href="#创建一个-github-pages-个人博客" class="headerlink" title="创建一个 github pages 个人博客"></a>创建一个 github pages 个人博客</h2><p>1.首先创建一个仓库</p>
+<p><img src="https://s2.ax1x.com/2019/09/26/umPEse.png" alt="点红框"></p>
+<p><img src="https://s2.ax1x.com/2019/09/26/umPmdA.png" alt></p>
+<p>框框里按</p>
+<blockquote>
+<p>name.github.io</p>
+</blockquote>
+<p>格式来写 name 就是你的 github 的 name</p>
+<p>2.生成令牌 （git 提交时校验身份）</p>
+<p>在 git bash 中使用以下命令（需先设置用户名和邮箱）</p>
+<p><code>cd ~/.ssh</code><br><code>ssh-keygen -t rsa -C &quot;邮箱@qq.com&quot; // 邮箱处写自己邮箱</code></p>
+<p>一路回车</p>
+<ol start="3">
+<li><p>复制本地的 key 并添加到 git 上</p>
+<p><img src="https://s2.ax1x.com/2019/09/26/umPnII.png" alt="复制key"></p>
+</li>
+</ol>
+<p><img src="https://s2.ax1x.com/2019/09/26/umPeZd.png" alt="设置"></p>
+<p><img src="https://s2.ax1x.com/2019/09/26/umPKit.png" alt="key"></p>
+<p><img src="https://s2.ax1x.com/2019/09/26/umPMJP.png" alt="新建key"></p>
+<p>一眼就懂 不解释</p>
+<p>4.测试一下</p>
+<p><img src="https://s2.ax1x.com/2019/09/26/umPQRf.png" alt="测试"></p>
+<p>博客搭建完成!</p>
+<h2 id="hexo-关联到-github"><a href="#hexo-关联到-github" class="headerlink" title="hexo 关联到 github"></a>hexo 关联到 github</h2><p>1.配置 Deployment，在 hexo 文件夹中，找到_config.yml 文件</p>
+<p><img src="https://s2.ax1x.com/2019/09/26/umPlz8.png" alt="_config.ym"></p>
+<p>repo 填你博客仓库的 ssh</p>
+<p><img src="https://s2.ax1x.com/2019/09/26/umP3QS.png" alt="github pages ssh"></p>
+<p>2.下载部署所需扩展</p>
+<p><code>npm i hexo-deployer-git --save</code></p>
+<ol start="3">
+<li><p>部署<br><img src="https://s2.ax1x.com/2019/09/26/umPGLQ.png" alt="部署命令"></p>
+<p><img src="https://s2.ax1x.com/2019/09/26/umPYZj.png" alt="成功提示"></p>
+</li>
+</ol>
+<p>大功告成~</p>
+<h2 id="域名解析到-github"><a href="#域名解析到-github" class="headerlink" title="域名解析到 github"></a>域名解析到 github</h2><p>1.在 source 文件夹新建一个 CNAME 文件 不要后缀</p>
+<p><img src="https://s2.ax1x.com/2019/09/26/umPtds.png" alt="CNAME"></p>
+<p>填上自己的域名</p>
+<p>2.域名解析</p>
+<p><img src="https://s2.ax1x.com/2019/09/26/umPNon.png" alt="域名管理"></p>
+<p><img src="https://s2.ax1x.com/2019/09/26/umPaiq.png" alt="新建"></p>
+<p>添加两条 CANME 主机记录一个@一个 www 记录值填你的 github pages 地址</p>
+<h3 id="hexo-常用命令"><a href="#hexo-常用命令" class="headerlink" title="hexo 常用命令"></a>hexo 常用命令</h3><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo s == hexo server    <span class="comment">//启动服务预览</span></span><br><span class="line">hexo g == hexo <span class="keyword">generate</span>  <span class="comment">//生成</span></span><br><span class="line">hexo d == hexo deploy    <span class="comment">//部署</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="//xhui.top/2018/11/06/使用hexo和github-pages搭建个人博客/" data-id="clwj7c8da000vcmdifc4k57bo"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/教程/">教程</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2018/12/07/JS设计模式-1-富有表现力的JS/" class="article-nav-link">
+        <strong class="article-nav-caption">前一篇</strong>
+        <div class="article-nav-title">
+          
+            JS设计模式---1.富有表现力的JS
+          
+        </div>
+      </a>
+    
+    
+  </nav>
+
+
+  
+
+  
+    
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: 'e238813be5ede70edbe4',
+      clientSecret: '8a1c133e698954649de728ddaf86cd2a1a977f9b',
+      repo: 'xhuishen.github.io',
+      owner: 'xhuishen',
+      admin: ['xhuishen'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2024 一点儿都不慌</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <!-- <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li> -->
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/logo.png" alt="一点儿都不慌"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">首页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+    <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/snap.svg-min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>

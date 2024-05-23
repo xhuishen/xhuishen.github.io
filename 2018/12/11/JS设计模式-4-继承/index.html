@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="xhui Blog, 博客 , 技术博客 , 前端,个人博客">
+  
+  
+    <meta name="description" content="梦想什么时候开始都不晚。">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    JS设计模式---4.继承 |
+    
+    一点儿都不慌</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-JS设计模式-4-继承" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS设计模式---4.继承
+    </h1>
+  
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2018/12/11/JS设计模式-4-继承/" class="article-date">
+  <time datetime="2018-12-10T16:00:00.000Z" itemprop="datePublished">2018-12-11</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <blockquote>
+<p>场景： 我们需要目前有一个超类 Person，现在需要一个 Author 类来继承超类的所有方法及属性，并且拥有自己的方法和属性</p>
+</blockquote>
+ <a id="more"></a>
+<h3 id="类式继承"><a href="#类式继承" class="headerlink" title="类式继承"></a>类式继承</h3><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Person 超类</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span><span class="params">(name)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.getName = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>原型链</li>
+</ul>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  继承超类的类 Author</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Author</span><span class="params">(name, books)</span> <span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">   // 在使用new运算符时，系统会先创建一个空对象，然后调用构造函数，此过程中空对象处于作用域链最前端</span></span></span><br><span class="line"><span class="function"><span class="comment">   // 这里我们调用超类的构造函数，就需要手懂模拟这个过程。此时this代表空对象，name为参数</span></span></span><br><span class="line"><span class="function"><span class="comment">   Person.call(this, name);</span></span></span><br><span class="line"><span class="function"><span class="comment">   this.books = books;</span></span></span><br><span class="line"><span class="function"><span class="comment"> &#125;</span></span></span><br><span class="line"><span class="function"> <span class="title">Author</span>.<span class="title">prototype</span> = <span class="title">new</span> <span class="title">Person</span><span class="params">()</span>;</span> <span class="comment">// 使Author的原型指向Person的实例 此时原型的构造函数（constructor）被重置</span></span><br><span class="line"> Author.prototype<span class="function">.<span class="keyword">constructor</span> = <span class="title">Author</span>;</span> <span class="comment">// 重定向Author原型的构造函数 不定义的话此构造函数为空，那么将会向上查找，指向Person</span></span><br><span class="line"> Author.prototype.getBooks = <span class="function"><span class="keyword">function</span> <span class="params">()</span> <span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">   return this.books;</span></span></span><br><span class="line"><span class="function"><span class="comment"> &#125;</span></span></span><br><span class="line"><span class="function"> <span class="title">var</span> <span class="title">author</span> = [];</span></span><br><span class="line"> author[<span class="number">0</span>] = <span class="keyword">new</span> Author(<span class="string">'Dustin Diaz'</span>, [<span class="string">'JavaScript Design Patterns'</span>]);</span><br><span class="line"> author[<span class="number">1</span>] = <span class="keyword">new</span> Author(<span class="string">'Ross Harmes'</span>, [<span class="string">'JavaScript Design Patterns'</span>]);</span><br><span class="line"> console.log(author[<span class="number">1</span>].getName()) <span class="comment">// Ross Harmes</span></span><br><span class="line"> console.log(author[<span class="number">1</span>].getBooks()) <span class="comment">// ['JavaScript Design Patterns']</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>extend 函数</li>
+</ul>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// extend函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">extend</span><span class="params">(subClass, superClass)</span> <span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">  var F = function () &#123;&#125;</span>;</span> <span class="comment">// 先创造一个空对象</span></span><br><span class="line">  F.prototype = superClass.prototype; <span class="comment">// 使空对象的原型指向超类的原型</span></span><br><span class="line">  subClass.prototype = new F(); <span class="comment">// 使当前类的原型指向F的实例</span></span><br><span class="line">  subClass.prototype<span class="function">.<span class="keyword">constructor</span> = <span class="title">subClass</span>;</span> <span class="comment">// 重定向当前类的原型的构造函数</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// superclass 用于直接访问超类的方法</span></span><br><span class="line"> <span class="comment">// 使用场景 在既想重定义超类的方法而又想访问其在超类中的实现时 栗子在下面</span></span><br><span class="line">  subClass.superclass = superClass.prototype;</span><br><span class="line">  <span class="comment">// 判断构造器指向</span></span><br><span class="line">  <span class="keyword">if</span> (superClass.prototype<span class="function">.<span class="keyword">constructor</span> == <span class="title">Object</span>.<span class="title">prototype</span>.<span class="title">constructor</span>) <span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">    superClass.prototype.constructor = superClass</span></span></span><br><span class="line"><span class="function"><span class="comment">  &#125;</span></span></span><br><span class="line"><span class="function">&#125;</span></span><br><span class="line"><span class="function"><span class="comment">// Author 类</span></span></span><br><span class="line"><span class="function"><span class="title">function</span> <span class="title">Author</span><span class="params">(<span class="keyword">name</span>, books)</span> <span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">  Author.superclass.constructor.call(this, name)</span></span></span><br><span class="line"><span class="function"><span class="comment">  this.books = books</span></span></span><br><span class="line"><span class="function"><span class="comment">&#125;</span></span></span><br><span class="line"><span class="function"><span class="title">extend</span><span class="params">(Author, Person)</span></span></span><br><span class="line"><span class="function"><span class="title">var</span> <span class="title">xhui</span> = <span class="title">new</span> <span class="title">Author</span><span class="params">(<span class="string">'xhui'</span>, [<span class="string">'123'</span>])</span></span></span><br><span class="line"><span class="function"><span class="title">console</span>.<span class="title">log</span><span class="params">(xhui.getName()</span>)  <span class="comment">//xhui</span></span></span><br><span class="line"><span class="function"><span class="comment">// 利于supercalss来重定义超类的getName方法</span></span></span><br><span class="line"><span class="function"><span class="title">Author</span>.<span class="title">prototype</span>.<span class="title">getName</span> = <span class="title">function</span> <span class="params">()</span> <span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">  var name = Author.superclass.getName.call(this)</span></span></span><br><span class="line"><span class="function"><span class="comment">  return `$&#123;name&#125;</span>123123`</span></span><br><span class="line"><span class="function">&#125;</span></span><br><span class="line"><span class="function"><span class="title">console</span>.<span class="title">log</span><span class="params">(xhui.getName()</span>) <span class="comment">//xhui123123</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="原型式继承"><a href="#原型式继承" class="headerlink" title="原型式继承"></a>原型式继承</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// clone 函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">clone</span>(<span class="params">object</span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params">params</span>) </span>&#123;&#125;;</span><br><span class="line">  F.prototype = object;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> F();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Person 超类</span></span><br><span class="line"><span class="keyword">var</span> Person = &#123;</span><br><span class="line">  name: <span class="string">'default name'</span>,</span><br><span class="line">  getName: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> Author = clone(Person);</span><br><span class="line">Author.books = [];</span><br><span class="line">Author.getBooks = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.books;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> author;</span><br><span class="line">author = clone(Author);</span><br><span class="line"><span class="built_in">console</span>.log(author.getName()) <span class="comment">//default name</span></span><br><span class="line">author.name = <span class="string">'xhui'</span>;</span><br><span class="line">author.books = [<span class="string">'js设计模式'</span>]</span><br><span class="line"><span class="built_in">console</span>.log(author.getName()) <span class="comment">// 'xhui'</span></span><br><span class="line"><span class="built_in">console</span>.log(author.getBooks()) <span class="comment">//  ['js设计模式']</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>继承而来的成员的读和写具有不对等性。 在类式继承中，Author 的每一份实例都有自己的 books 数据副本。但是在原型式继承中大不相同， 一个克隆并非其原型对象的一份独完全立的副本，它只是一个以那个对象为原型对象的空对象。<br>克隆刚被创建时，author.name 其实是一个反指最初的 Person.name 的链接。对于从原型对象继承而来的成员，其读和写具有内在的不对等性。在你读取 author.name 时，如果你没有为其赋值，那么得到的是其原型对象的同名属性值。而你在为 author.name 赋值时，其实是在为 author 定义一个新属性。</p>
+</blockquote>
+<h3 id="掺元类"><a href="#掺元类" class="headerlink" title="掺元类"></a>掺元类</h3><blockquote>
+<p>我们平时总会定义一个包含各种通用方法的类，然后用它来扩充其他类。这种包含各种通用方法的类就是掺元类。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// argument  辅助函数</span></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">argument</span>(<span class="params">receivingClass, givingClass</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">if</span> (<span class="built_in">arguments</span>[<span class="number">2</span>]) &#123;</span><br><span class="line">     <span class="comment">// 如果有第三个参数  则为扩充类扩充名为第三个参数的方法</span></span><br><span class="line">     <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">2</span>; i &lt; <span class="built_in">arguments</span>.length; i++) &#123;</span><br><span class="line">       receivingClass.prototype[<span class="built_in">arguments</span>[i]] = givingClass.prototype[<span class="built_in">arguments</span>[i]]</span><br><span class="line"></span><br><span class="line">     &#125;</span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">     <span class="comment">// 如果只有两个参数 为扩充类扩充掺元类所有的方法</span></span><br><span class="line">     <span class="keyword">for</span> (methodName <span class="keyword">in</span> givingClass.prototype) &#123;</span><br><span class="line">       <span class="keyword">if</span> (!receivingClass.prototype[methodName]) &#123;</span><br><span class="line">         receivingClass.prototype[methodName] = givingClass.prototype[methodName]</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">// 掺元类</span></span><br><span class="line"> <span class="keyword">var</span> Mixin = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"> Mixin.prototype = &#123;</span><br><span class="line">   serialize: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">var</span> output = [];</span><br><span class="line">     <span class="keyword">for</span> (key <span class="keyword">in</span> <span class="keyword">this</span>) &#123;</span><br><span class="line">       output.push(<span class="string">`key:<span class="subst">$&#123;<span class="keyword">this</span>[key]&#125;</span>`</span>)</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">return</span> output</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">function</span> <span class="title">Author</span>(<span class="params">name, books</span>) </span>&#123;</span><br><span class="line">   <span class="keyword">this</span>.name = name;</span><br><span class="line">   <span class="keyword">this</span>.books = books;</span><br><span class="line"> &#125;</span><br><span class="line"> argument(Author, Mixin) <span class="comment">//  argument(Author, Mixin, 'serialize')</span></span><br><span class="line"> <span class="keyword">var</span> author = <span class="keyword">new</span> Author(<span class="string">'xhui'</span>, [<span class="string">'js设计模式'</span>]);</span><br><span class="line"> <span class="built_in">console</span>.log(author.serialize())</span><br></pre></td></tr></table></figure>
+<p>结果为<br><img src="https://upload-images.jianshu.io/upload_images/7390950-d6848a8fc556833d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="1544515452.jpg"></p>
+<h3 id="举个栗子"><a href="#举个栗子" class="headerlink" title="举个栗子"></a>举个栗子</h3><p>书上栗子有点长懒得写了。。。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="//xhui.top/2018/12/11/JS设计模式-4-继承/" data-id="clwj7c8cz000bcmdikik8hrgq"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS设计模式/">JS设计模式</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2018/12/12/JS设计模式-5-单体模式/" class="article-nav-link">
+        <strong class="article-nav-caption">前一篇</strong>
+        <div class="article-nav-title">
+          
+            JS设计模式---5.单体模式
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2018/12/10/JS设计模式-3-封装/" class="article-nav-link">
+        <strong class="article-nav-caption">后一篇</strong>
+        <div class="article-nav-title">JS设计模式---3.封装</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: 'e238813be5ede70edbe4',
+      clientSecret: '8a1c133e698954649de728ddaf86cd2a1a977f9b',
+      repo: 'xhuishen.github.io',
+      owner: 'xhuishen',
+      admin: ['xhuishen'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2024 一点儿都不慌</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <!-- <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li> -->
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/logo.png" alt="一点儿都不慌"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">首页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+    <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/snap.svg-min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>

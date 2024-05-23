@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="xhui Blog, 博客 , 技术博客 , 前端,个人博客">
+  
+  
+    <meta name="description" content="梦想什么时候开始都不晚。">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    小程序&amp;&amp;Taro记录 |
+    
+    一点儿都不慌</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-小程序&amp;&amp;Taro记录" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      小程序&amp;&amp;Taro记录
+    </h1>
+  
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/11/15/小程序&&Taro记录/" class="article-date">
+  <time datetime="2019-11-14T16:00:00.000Z" itemprop="datePublished">2019-11-15</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <ul>
+<li>Taro 扫码进入页面传递多个参数会被截断</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// url: '/index?scene=id=1&amp;aa=2'</span></span><br><span class="line"><span class="comment">// 实测android不会自动转码 = 号后面会被截断 ios不会</span></span><br><span class="line">console<span class="selector-class">.log</span> (  this.<span class="variable">$router</span><span class="selector-class">.params</span><span class="selector-class">.scene</span> )</span><br><span class="line"><span class="comment">// android   id</span></span><br><span class="line"><span class="comment">// ios    id=1&amp;aa=2</span></span><br></pre></td></tr></table></figure>
+  <a id="more"></a>
+<ul>
+<li><p>2.9.3 调试库 onInput 方法不触发</p>
+<blockquote>
+<p>官方 bug 找的我差点重装系统</p>
+</blockquote>
+</li>
+<li><p>小程序 textarea 浮动问题</p>
+<blockquote>
+<p>textarea 的父级设置了 overflow 会导致样式错乱，把所有父级的 overflow 去掉就好了</p>
+</blockquote>
+</li>
+<li><p>绑定事件传递数据</p>
+</li>
+</ul>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;text data-id=<span class="string">"1"</span> bindClick=<span class="string">"test"</span>&gt;&lt;/text&gt;</span><br><span class="line"><span class="comment">// e.currentTarget.dataset</span></span><br><span class="line"><span class="comment">// 需要注意的是 data - &#123;&#123;item&#125;&#125;  item是不允许驼峰命名的</span></span><br><span class="line"><span class="function"><span class="title">test</span><span class="params">(e)</span></span>&#123;</span><br><span class="line">  console.log(e<span class="selector-class">.currentTarget</span><span class="selector-class">.dataset</span>.id)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Taro 状态更新异步</li>
+</ul>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">this</span>.setState(&#123;</span><br><span class="line">  aa: <span class="number">1</span></span><br><span class="line">&#125;, <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="regexp">//</span> 在这个函数内你可以拿到 setState 之后的值</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>padding margin 不管用</p>
+<blockquote>
+<p>检查元素的 box-sizing 当前为什么模式 两种模式计算方式不一样</p>
+</blockquote>
+</li>
+<li><p>跳转 tabbar 页面要用 wx.switchTab</p>
+</li>
+<li><p>Taro 项目运行报错 依赖下载报错</p>
+</li>
+</ul>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//安装sass报错</span><br><span class="line">npm install -g mirror-config-china</span><br><span class="line">// 运行报错先检查<span class="keyword">node</span><span class="title">版本 node</span>版本要求在<span class="number">10</span>.x</span><br></pre></td></tr></table></figure>
+<ul>
+<li>审核问题<blockquote>
+<p>现在不允许任何主动弹窗,需要通过 button 来触发</p>
+</blockquote>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="//xhui.top/2019/11/15/小程序&&Taro记录/" data-id="clwj7c8dc0013cmdie1k9mo5j"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2019/11/21/初探NUXT(ssr)/" class="article-nav-link">
+        <strong class="article-nav-caption">前一篇</strong>
+        <div class="article-nav-title">
+          
+            初探NUXT(ssr)
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2019/07/24/VUE2+IVIEW 兼容ie9配置记录/" class="article-nav-link">
+        <strong class="article-nav-caption">后一篇</strong>
+        <div class="article-nav-title">VUE2+IVIEW 兼容ie9配置记录</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: 'e238813be5ede70edbe4',
+      clientSecret: '8a1c133e698954649de728ddaf86cd2a1a977f9b',
+      repo: 'xhuishen.github.io',
+      owner: 'xhuishen',
+      admin: ['xhuishen'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2024 一点儿都不慌</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <!-- <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li> -->
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/logo.png" alt="一点儿都不慌"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">首页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+    <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/snap.svg-min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="xhui Blog, 博客 , 技术博客 , 前端,个人博客">
+  
+  
+    <meta name="description" content="梦想什么时候开始都不晚。">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    JS设计模式---6.工厂模式 |
+    
+    一点儿都不慌</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-JS设计模式-6-工厂模式" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS设计模式---6.工厂模式
+    </h1>
+  
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2018/12/18/JS设计模式-6-工厂模式/" class="article-date">
+  <time datetime="2018-12-17T16:00:00.000Z" itemprop="datePublished">2018-12-18</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <h3 id="适用场合"><a href="#适用场合" class="headerlink" title="适用场合"></a>适用场合</h3><h5 id="动态实现"><a href="#动态实现" class="headerlink" title="动态实现"></a>动态实现</h5><blockquote>
+<p>与一系列实现了同一接口、可以被同等对待的类打交道时，需要使用工厂模式</p>
+</blockquote>
+ <a id="more"></a>
+<h5 id="节省设置开销"><a href="#节省设置开销" class="headerlink" title="节省设置开销"></a>节省设置开销</h5><blockquote>
+<p>如果对象需要进行复杂并且彼此相关的设置，那么使用工厂模式可以减少每种对象所需要的代码量。它可以在实例化所需要的对象之前先一次性的进行设置。<br>如果所用的类要求加载外部库的话，工厂方法可以对这这些库进行检查并动态加载那些未找到的库</p>
+</blockquote>
+<h5 id="用许多小对象组成一个大对象"><a href="#用许多小对象组成一个大对象" class="headerlink" title="用许多小对象组成一个大对象"></a>用许多小对象组成一个大对象</h5><blockquote>
+<p>工厂方法可以用来创建封装了许多小对象的对象。如果你不想让某个子系统与比较大的那个对象之间形成强耦合，而是想在运行时从许多子系统中进行挑选的话，那么使用工厂方法是比较理想的选择。</p>
+</blockquote>
+<h3 id="简单工厂"><a href="#简单工厂" class="headerlink" title="简单工厂"></a>简单工厂</h3><blockquote>
+<p>假设你想开几个自行车商店，每个店都有几种型号的自行车出售。这可以用一个类来表示</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// BicycleFactory  单体</span></span><br><span class="line"> <span class="keyword">var</span> BicycleFactory = &#123;</span><br><span class="line">   createBicycle: <span class="function"><span class="keyword">function</span> (<span class="params">model</span>) </span>&#123;</span><br><span class="line">     <span class="keyword">var</span> bicycle;</span><br><span class="line">     <span class="keyword">switch</span> (model) &#123;</span><br><span class="line">       <span class="keyword">case</span> <span class="string">'The Speedster'</span>:</span><br><span class="line">         bicycle = <span class="keyword">new</span> Speedster();</span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line">       <span class="keyword">case</span> <span class="string">'The Lowrider'</span>:</span><br><span class="line">         bicycle = <span class="keyword">new</span> Lowrider();</span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line">       <span class="keyword">case</span> <span class="string">'The Comfort Cruiser'</span>:</span><br><span class="line">       <span class="keyword">default</span>:</span><br><span class="line">         bicycle = <span class="keyword">new</span> ComfortCruiser</span><br><span class="line">         <span class="keyword">break</span>;</span><br><span class="line">     &#125;</span><br><span class="line">     interface.ensureImplements(bicycle,Bicycle);</span><br><span class="line">     <span class="keyword">return</span> bicycle</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">//  BicycleShop class</span></span><br><span class="line"> <span class="keyword">var</span> BicycleShop = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"> BicycleShop.prototype = &#123;</span><br><span class="line">   <span class="comment">// sellBicycle根据所要求的自行车型号创建一个自行车实例，各种型号的实例可以互换使用，因为它们都实现了Bicycle接口</span></span><br><span class="line">   sellBicycle:<span class="function"><span class="keyword">function</span>(<span class="params">model</span>)</span>&#123;</span><br><span class="line">     <span class="keyword">var</span> bicycle = BicycleFactory.createBicycle(model);</span><br><span class="line">     bicycle.assemble();</span><br><span class="line">     bicycle.wash();</span><br><span class="line">     <span class="keyword">return</span> bicycle</span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">// Bicycle接口</span></span><br><span class="line"> <span class="keyword">var</span> Bicycle = <span class="keyword">new</span> Interface(<span class="string">'Bicycle'</span>,[<span class="string">'assemble'</span>,<span class="string">'wash'</span>,<span class="string">'ride'</span>,<span class="string">'repair'</span>]);</span><br><span class="line"> <span class="comment">// Speedster class</span></span><br><span class="line"> <span class="keyword">var</span> Speedster = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line"> Speedster.prototype = &#123;</span><br><span class="line">   assemble: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="comment">// ...</span></span><br><span class="line">   &#125;,</span><br><span class="line">   wash: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="comment">// ...</span></span><br><span class="line">   &#125;,</span><br><span class="line">   ride:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">     <span class="comment">// ...</span></span><br><span class="line">   &#125;,</span><br><span class="line">   repair:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">     <span class="comment">// ...</span></span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>BicycleFactory 就是简单工厂的一个例子。这种模式把成员对象的创建工作转交给一个外部对象。这个外部对象可以像本例是一个简单的命名空间，也可以是一个类的实例。</p>
+</blockquote>
+<h3 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h3><blockquote>
+<p>真正的工厂模式与简单工厂模式的区别在于，它不是另外使用一个类或对象来创建自行车，而是使用一个子类。<br>按照正式定义，工厂是一个将其成员对象的实例化推迟到子类中进行的类。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// BicycleShop class (抽象类)</span></span><br><span class="line"><span class="keyword">var</span> BicycleShop = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">BicycleShop.prototype = &#123;</span><br><span class="line">   sellBicycle:<span class="function"><span class="keyword">function</span>(<span class="params">model</span>)</span>&#123;</span><br><span class="line">     <span class="keyword">var</span> bicycle = <span class="keyword">this</span>.createBicycle(model);</span><br><span class="line">     bicycle.assemble();</span><br><span class="line">     bicycle.wash();</span><br><span class="line">     <span class="keyword">return</span> bicycle;</span><br><span class="line">  &#125;,</span><br><span class="line">  createBicycle:<span class="function"><span class="keyword">function</span>(<span class="params">model</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 抛出错误 不能在抽象类中实例化</span></span><br><span class="line">     <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Unsupported operation on an abstract class'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 设计一个经销特定自行车生产厂家产品的子类需要扩展BicycleShop 重新定义其中的createBicycle方法 下面为两个子类 其中一个子类代表的商店从Acme公司进货 另一个从General Products 公司进货</span></span><br><span class="line"><span class="comment">// AcmeBicycleShop class</span></span><br><span class="line"><span class="keyword">var</span> AcmeBicycleShop = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">extend(AcmeBicycleShop,BicycleShop);  <span class="comment">// 继承</span></span><br><span class="line">AcmeBicycleShop.prototype.createBicycle = <span class="function"><span class="keyword">function</span> (<span class="params">model</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> bicycle;</span><br><span class="line">  <span class="keyword">switch</span> (model) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'The Speedster'</span>:</span><br><span class="line">      bicycle = <span class="keyword">new</span> AmceSpeedster();</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">     <span class="keyword">case</span> <span class="string">'The Comfort Cruiser'</span>:</span><br><span class="line">     <span class="keyword">default</span>:</span><br><span class="line">       bicycle =<span class="keyword">new</span> AmceComfortCruiser();</span><br><span class="line">       <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  Interface.ensureImplements(bicycle,Bicycle);</span><br><span class="line">  <span class="keyword">return</span> bicycle;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// GeneraProductsBicycleShop class</span></span><br><span class="line"><span class="keyword">var</span> GeneraProductsBicycleShop = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line">extend(GeneraProductsBicycleShop,BicycleShop)； <span class="comment">//继承</span></span><br><span class="line">GeneraProductsBicycleShop.prototype.createBicycle = <span class="function"><span class="keyword">function</span> (<span class="params">model</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> bicycle;</span><br><span class="line">  <span class="keyword">switch</span> (model) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'The Speedster'</span>:</span><br><span class="line">      bicycle = <span class="keyword">new</span> GeneraProductsSpeedster();</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">     <span class="keyword">case</span> <span class="string">'The Comfort Cruiser'</span>:</span><br><span class="line">     <span class="keyword">default</span>:</span><br><span class="line">       bicycle =<span class="keyword">new</span> GeneraProductsComfortCruiser();</span><br><span class="line">       <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  Interface.ensureImplements(bicycle,Bicycle);</span><br><span class="line">  <span class="keyword">return</span> bicycle;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 这些工厂方法生成的对象都实现了Bicycle接口，所以在其它代码眼里他们完全可以互换</span></span><br><span class="line"><span class="comment">// 销售工作还是一样 只是现在所开的商店可以是Amce或者General Products自行车专卖店</span></span><br><span class="line"><span class="keyword">var</span> alecsCruisers = <span class="keyword">new</span> AcmeBicycleShop();</span><br><span class="line"><span class="keyword">var</span> yourNewBike = alecsCruisers.createBicycle(<span class="string">'The Speedster'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bobsCruisers = <span class="keyword">new</span> GeneraProductsBicycleShop();</span><br><span class="line"><span class="keyword">var</span> yourSecondNewBike = bobsCruisers.createBicycle(<span class="string">'The Speedster'</span>)</span><br><span class="line"><span class="comment">// 增加对其他生产厂家的支持也很简单，只要再创建一个BicycleShop的子类并重新定义其createBicycle方法即可。 一般性的代码被集中在一个位置，而个体性的代码则被封装在子类中</span></span><br></pre></td></tr></table></figure>
+<h3 id="一个栗子-XHR-工厂"><a href="#一个栗子-XHR-工厂" class="headerlink" title="一个栗子 (XHR 工厂)"></a>一个栗子 (XHR 工厂)</h3><ul>
+<li>简单工厂</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// AjaxHandler 接口</span></span><br><span class="line"><span class="keyword">var</span> AjaxHandler = <span class="keyword">new</span> Interface(<span class="string">'AjaxHandler'</span>,[<span class="string">'request'</span>,<span class="string">'createXhrObject'</span>]);</span><br><span class="line"><span class="comment">// SimpleHandler classs</span></span><br><span class="line"><span class="keyword">var</span> SimpleHandler = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">SimpleHandler.prototype = &#123;</span><br><span class="line">  <span class="comment">// reuqest 负责执行发出请求和处理响应结果所需要的一系列操作</span></span><br><span class="line">  request:<span class="function"><span class="keyword">function</span>(<span class="params">method,url,callback,postVars</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> xhr = <span class="keyword">this</span>.createXhrObject;</span><br><span class="line">    xhr.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (xhr.readyState !== <span class="number">4</span>) <span class="keyword">return</span>;</span><br><span class="line">      (xhr.status ===<span class="number">200</span> )?</span><br><span class="line">      callback.success(xhr.reponseText,xhr.responseXML):</span><br><span class="line">      callback.failure(xhr.status)</span><br><span class="line">    &#125;;</span><br><span class="line">    xhr.open(method,url,<span class="literal">true</span>);</span><br><span class="line">    <span class="keyword">if</span> (method !== <span class="string">'POST'</span>) postVars = <span class="literal">null</span>;</span><br><span class="line">    xhr.send(postVars);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// caeateXhrObject 根据当前环境的具体情况返回一个XHR对象。在首次执行时，它会一次尝试三种用于创建XHR对象的不同方法，一旦遇到一种管用的它就回返回所创建的对象并将自身改为可以用以创建的哪个对象的函数。</span></span><br><span class="line">  <span class="comment">//这种技术叫做memoizing，它可以提高代码的效率，因为所有设置的检测代码都只会执行一次。</span></span><br><span class="line">  caeateXhrObject:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> methods = [</span><br><span class="line">      <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ActiveXObject(<span class="string">'Msxml2.XMLHttpRequest'</span>);</span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ActiveXObject(<span class="string">'Microsoft.XMLHTTP'</span>);</span><br><span class="line">      &#125;,</span><br><span class="line">    ];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; methods.length; i++) &#123;</span><br><span class="line">      <span class="keyword">try</span>&#123;</span><br><span class="line">        methods[i]()</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">catch</span>&#123;</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">this</span>.caeateXhrObject = methods[i];</span><br><span class="line">      <span class="keyword">return</span> methods[i]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'SimpleHandler: Could not create an XHR objece'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line"><span class="keyword">var</span> myHandler = <span class="keyword">new</span> SimpleHandler();</span><br><span class="line"><span class="keyword">var</span> callback = &#123;</span><br><span class="line">  success:<span class="function"><span class="keyword">function</span>(<span class="params">reponseText</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;,</span><br><span class="line">  failure:<span class="function"><span class="keyword">function</span>(<span class="params">statusCode</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">myHandler.request(<span class="string">'GET'</span>,<span class="string">'script.php'</span>,callback)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>专用型连接对象<blockquote>
+<p>这个栗子可以进一步扩展，把工厂模式用在两个地方，以便根据网络条件创建专门的请求对象。<br>QueueHandler 会在发起新的请求之前先确保所有的请求都已经成功处理，而 OfflineHandler 则会在用户处于离线状态时把请求缓存起来。</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// QueueHandler class 在发起新的请求之前先确保所有请求已经成功处理</span></span><br><span class="line"><span class="keyword">var</span> QueueHandler = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.queue = [];</span><br><span class="line">  <span class="keyword">this</span>.requestInProgress = <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">this</span>.retryDelay = <span class="number">5</span> <span class="comment">// 秒</span></span><br><span class="line">&#125;</span><br><span class="line">extend(QueueHandler,SimpleHandler);</span><br><span class="line">QueueHandler.prototype.request = <span class="function"><span class="keyword">function</span> (<span class="params">method,url,callback,postVars,override</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.requestInProgress &amp;&amp; !override) &#123;  <span class="comment">// 如果有请求没有处理成功，把本次请求暂存</span></span><br><span class="line">      <span class="keyword">this</span>.queue.push(&#123;</span><br><span class="line">        method,</span><br><span class="line">        url,</span><br><span class="line">        callback,</span><br><span class="line">        postVars</span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span>&#123;  <span class="comment">// 如果所有请求都已成功 发送本次请求</span></span><br><span class="line">    <span class="keyword">this</span>.requestInProgress = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">var</span> xhr = <span class="keyword">this</span>.createXhrObject();</span><br><span class="line">    <span class="keyword">var</span> that = <span class="keyword">this</span>;</span><br><span class="line">    xhr.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (xhr.readyState !== <span class="number">4</span>) <span class="keyword">return</span>;</span><br><span class="line">      <span class="keyword">if</span> (xhr.status === <span class="number">200</span>) &#123;</span><br><span class="line">        callback.success(xhr.reponseText,xhr.responseXML);</span><br><span class="line">        that.advanceQueue();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">else</span>&#123;</span><br><span class="line">        callback.failure(xhr.status);</span><br><span class="line">        <span class="comment">// 5s后再次发起请求</span></span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">          that.request(method,url,callback,postVars,<span class="literal">true</span>)</span><br><span class="line">        &#125;, that.retryDelay*<span class="number">1000</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    xhr.open(method,url,<span class="literal">true</span>);</span><br><span class="line">    <span class="keyword">if</span> (method !== <span class="string">'POST'</span>) postVars = <span class="literal">null</span>;</span><br><span class="line">    xhr.send(postVars)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">QueueHandler.prototype.advanceQueue = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.queue.length !== <span class="number">0</span>) &#123;  <span class="comment">// 如果暂存列表为空 结束本次函数</span></span><br><span class="line">    <span class="keyword">this</span>.requestInProgress = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">var</span> req = <span class="keyword">this</span>.queue.shift();   <span class="comment">// 如果不为空 发起暂存列表的第一个请求</span></span><br><span class="line">  <span class="keyword">this</span>.request(req.method,req.url,req.callback,req.postVars,<span class="literal">true</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// OfflineHandler calss</span></span><br><span class="line"><span class="keyword">var</span> OfflineHandler = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.storedRequests = [];</span><br><span class="line">&#125;;</span><br><span class="line">extend(OfflineHandler,SimpleHandler);</span><br><span class="line">OfflineHandler.prototype.request = <span class="function"><span class="keyword">function</span> (<span class="params">method,url,callback,postVars</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (XhrManager.isOffline()) &#123;   <span class="comment">// XhrManager.isOffline方法判断是否离线</span></span><br><span class="line">    <span class="keyword">this</span>.storedRequests.push(&#123;</span><br><span class="line">      method,</span><br><span class="line">      url,</span><br><span class="line">      callback,</span><br><span class="line">      postVars</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.flusStoredRequests();</span><br><span class="line">    <span class="comment">// 调用超类（也就是父类）的request方法</span></span><br><span class="line">    OfflineHandler.superclass.request(method,url,callback,postVars)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">OfflineHandler.prototype.flusStoredRequests = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; storedRequests.length; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> req = storedRequests[i];</span><br><span class="line">    OfflineHandler.superclass.request(req.method,req.url,req.callback,req.postVars)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在运行时选择连接对象（工厂模式）<blockquote>
+<p>因为程序员根本不可能知道各个最终用户实际面临的网络条件，所以不可能要求他们在开发中选择使用那个处理器类，而是应该用一个工厂在运行时选择最合适的类</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// XhrManager 单例</span></span><br><span class="line"><span class="keyword">var</span> XhrManager = &#123;</span><br><span class="line">  createXhrHandler:<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> xhr;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.isOffline()) &#123;</span><br><span class="line">      xhr = <span class="keyword">new</span> OfflineHandler();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.isHighLatency()) &#123;</span><br><span class="line">      xhr = <span class="keyword">new</span> QueueHandler();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">      xhr = <span class="keyword">new</span> SimpleHandler();</span><br><span class="line">    &#125;</span><br><span class="line">    Interface.ensureImplements(xhr,AjaxHandler);</span><br><span class="line">    <span class="keyword">return</span> xhr</span><br><span class="line">  &#125;,</span><br><span class="line">  isOffline:<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//...   判断是否离线</span></span><br><span class="line">  &#125;,</span><br><span class="line">  isHighLatency:<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//..  判断是否高延迟</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 使用</span></span><br><span class="line"><span class="keyword">var</span> myHandler = XhrManager.createXhrHandler();</span><br><span class="line"><span class="keyword">var</span> callback = &#123;</span><br><span class="line">  success:<span class="function"><span class="keyword">function</span><span class="params">(responseText)</span></span>&#123;</span><br><span class="line">   <span class="comment">// ...</span></span><br><span class="line">  &#125;,</span><br><span class="line">  failure:<span class="function"><span class="keyword">function</span><span class="params">(statusCode)</span></span>&#123;</span><br><span class="line">   <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">myHandler.request(<span class="string">'GET'</span>,<span class="string">'script.php'</span>,callback)</span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><blockquote>
+<p>简单工厂通常另外使用一个类或者对象封装实例化操作，而真正的工厂模式则需要实现一个抽象的工厂方法并把实例化工作推迟到子类中进行。<br>工厂模式可以弱化对象间的耦合，防止代码重复。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="//xhui.top/2018/12/18/JS设计模式-6-工厂模式/" data-id="clwj7c8d3000gcmdimr4c3as6"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS设计模式/">JS设计模式</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2018/12/19/JS设计模式-7-桥接模式/" class="article-nav-link">
+        <strong class="article-nav-caption">前一篇</strong>
+        <div class="article-nav-title">
+          
+            JS设计模式---7.桥接模式
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2018/12/12/JS设计模式-5-单体模式/" class="article-nav-link">
+        <strong class="article-nav-caption">后一篇</strong>
+        <div class="article-nav-title">JS设计模式---5.单体模式</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: 'e238813be5ede70edbe4',
+      clientSecret: '8a1c133e698954649de728ddaf86cd2a1a977f9b',
+      repo: 'xhuishen.github.io',
+      owner: 'xhuishen',
+      admin: ['xhuishen'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2024 一点儿都不慌</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <!-- <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li> -->
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/logo.png" alt="一点儿都不慌"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">首页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+    <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/snap.svg-min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>

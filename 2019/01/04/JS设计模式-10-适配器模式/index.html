@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="xhui Blog, 博客 , 技术博客 , 前端,个人博客">
+  
+  
+    <meta name="description" content="梦想什么时候开始都不晚。">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    JS设计模式---10.适配器模式 |
+    
+    一点儿都不慌</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-JS设计模式-10-适配器模式" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JS设计模式---10.适配器模式
+    </h1>
+  
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/01/04/JS设计模式-10-适配器模式/" class="article-date">
+  <time datetime="2019-01-03T16:00:00.000Z" itemprop="datePublished">2019-01-04</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <h3 id="适配器模式的作用"><a href="#适配器模式的作用" class="headerlink" title="适配器模式的作用"></a>适配器模式的作用</h3><blockquote>
+<p>适配器模式可用来在现有接口和不兼容的类之间进行适配，使用这种模式的对象又叫包装器。（个人理解其实就是用来做兼容的一种模式）</p>
+</blockquote>
+ <a id="more"></a>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><blockquote>
+<p>适配器可以被添加到现有代码中以协调两个不同的接口。<br>从表面上看，适配器模式和门面模式很像，它们都是要对别的对象进行包装并改变其呈现的接口。但是它们的不同之处就在于如何改变接口。门面元素只是一个简化的接口，并没有额外的选择，而适配器则要把一个接口转换到另一个接口，他不会滤除某些能力，也不会简化接口。</p>
+</blockquote>
+<h3 id="方法兼容"><a href="#方法兼容" class="headerlink" title="方法兼容"></a>方法兼容</h3><blockquote>
+<p>假设你有一个具有 3 个字符串参数的函数，但客户系统拥有的却是一个包含三个字符串元素的对象，此时就可以用一个适配器来衔接二者</p>
+</blockquote>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 假设你有一个对象 还有一个以三个字符串味参数的函数</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">      string1:<span class="string">"foo"</span>,</span><br><span class="line">      string2:<span class="string">"bar"</span>,</span><br><span class="line">      string3:<span class="string">"baz"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">interfaceMethod</span><span class="params">(str1,str2,str3)</span></span>&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 为了把obj作为参数传递给interfaceMethod 需要用到适配器</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">clientToInterfaceAdapter</span><span class="params">(o)</span></span>&#123;</span><br><span class="line">   interfaceMethod(o.string1,o.string2,o.string3)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 现在就可以把整个对象传递给这个函数</span></span><br><span class="line">clientToInterfaceAdapter(obj)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>吐槽一下，个人觉得，这种简单的完全没啥子必要。。。直接 interfaceMethod(obj.string1,obj.string2,obj.string3)又快又好。。可能书上是为了通熟易懂吧。</p>
+</blockquote>
+<h3 id="适配原有实现"><a href="#适配原有实现" class="headerlink" title="适配原有实现"></a>适配原有实现</h3><blockquote>
+<p>在某些情况下，从客户一方对代码进行修改是不可能的。因此我们会避免创建 API。如果现有接口发生了改变，那么客户代码也必须进行相应的修改才能使用这个接口，否则整个应用系统就会有失灵的危险。在引入新接口之后，一般来说最好向客户方提供一些可为其实现新接口的适配器。</p>
+</blockquote>
+<h3 id="适配两个库"><a href="#适配两个库" class="headerlink" title="适配两个库"></a>适配两个库</h3><blockquote>
+<p>适配 Prototype 库的\$函数到 YUI 的 get 方法的转换。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Prototype $ function</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">$</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> elements = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line">  <span class="keyword">for</span>(vari=<span class="number">0</span>;i&lt;<span class="built_in">arguments</span>.length;i++)&#123;</span><br><span class="line">    <span class="keyword">var</span> element = <span class="built_in">arguments</span>[i];</span><br><span class="line">     <span class="keyword">if</span>(<span class="keyword">typeof</span> element  == <span class="string">'string'</span>)</span><br><span class="line">       element = <span class="built_in">document</span>.getElementById(element);</span><br><span class="line">      <span class="keyword">if</span>(<span class="built_in">arguments</span>.length == <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> element;</span><br><span class="line">       elements.push(element);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> elements</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// YUI get method</span></span><br><span class="line">YAHOO.util.Dom.get = <span class="function"><span class="keyword">function</span>(<span class="params">el</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(YAHOO.lang.isString(el))&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">document</span>.getElementById(el);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(YAHOO.lang.isArray(el))&#123;</span><br><span class="line">    <span class="keyword">var</span> c = [];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;el.length;i++)&#123;</span><br><span class="line">       c[c.length] = YAHOO.util.get(el[i])</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> c;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span>(el) <span class="keyword">return</span> el;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>二者的区别在于：get 具有一个参数，这个参数可以是一个 HTML 元素 字符串或者由字符串或 HTML 元素组成的数组，而\$函数并没有正式列出参数，而是由客户任意传入任意数目的参数，不管是字符串还是 HTML 元素都行<br>如果需要从使用 Prototype 的\$函数改为使用 YUI 的 get 方法(或者相反)，那么这个适配器需要这样写</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">PrototypeToYUIAdapter</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="keyword">return</span> YAHOO.util.Dom.get(<span class="built_in">arguments</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">YUIToPrototypeAdapter</span>(<span class="params">el</span>)</span>&#123;</span><br><span class="line">   <span class="keyword">return</span> $.apply(<span class="built_in">window</span>,el intanceof <span class="built_in">Array</span> ? el : [el])</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 对于从Prototype投奔YUI的人来说，只需要添加下面这行代码</span></span><br><span class="line">$ = PrototypeToYUIAdapter</span><br><span class="line"><span class="comment">//同理 对于YUI改投Prototype的人来说</span></span><br><span class="line">YAHOO.util.Dom.get  = YUIToPrototypeAdapter</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="//xhui.top/2019/01/04/JS设计模式-10-适配器模式/" data-id="clwj7c8cw0007cmdiinijq2xy"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS设计模式/">JS设计模式</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2019/03/10/CSS常用系列整理/" class="article-nav-link">
+        <strong class="article-nav-caption">前一篇</strong>
+        <div class="article-nav-title">
+          
+            CSS常用系列整理
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2018/12/21/JS设计模式-9-门面模式/" class="article-nav-link">
+        <strong class="article-nav-caption">后一篇</strong>
+        <div class="article-nav-title">JS设计模式---9.门面模式</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: 'e238813be5ede70edbe4',
+      clientSecret: '8a1c133e698954649de728ddaf86cd2a1a977f9b',
+      repo: 'xhuishen.github.io',
+      owner: 'xhuishen',
+      admin: ['xhuishen'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2024 一点儿都不慌</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <!-- <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li> -->
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/logo.png" alt="一点儿都不慌"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">首页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+    <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/snap.svg-min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>

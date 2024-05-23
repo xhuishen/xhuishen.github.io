@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  
+    <meta name="keywords" content="xhui Blog, 博客 , 技术博客 , 前端,个人博客">
+  
+  
+    <meta name="description" content="梦想什么时候开始都不晚。">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    Http请求与响应 |
+    
+    一点儿都不慌</title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+    <link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+  
+  <script src="/js/pace.min.js"></script>
+</head>
+</html>
+<body>
+<main class="content">
+  <section class="outer">
+  <article id="post-Http请求与响应" class="article article-type-post" itemscope itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Http请求与响应
+    </h1>
+  
+
+
+      </header>
+    
+
+    
+      <div class="article-meta">
+        <a href="/2019/05/14/Http请求与响应/" class="article-date">
+  <time datetime="2019-05-13T16:00:00.000Z" itemprop="datePublished">2019-05-14</time>
+</a>
+        
+      </div>
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+
+      
+
+      
+        <h4 id="HTTP-的请求报文包括四个部分"><a href="#HTTP-的请求报文包括四个部分" class="headerlink" title="HTTP 的请求报文包括四个部分"></a>HTTP 的请求报文包括四个部分</h4><ul>
+<li><p>请求行<br>请求方法，请求 URL，HTTP 协议版本</p>
+<a id="more"></a>
+</li>
+<li><p>请求体<br>Accept： 客户端接收的数据类型<br>Cache-Control：请求和响应遵循的缓存机制<br>Connection：是否保持长连接。keep-alive （默认） close<br>Content-Length：请求体的长度<br>Content-Type： 请求的格式/类型 text/html<br>Host: 服务器域名<br>Referer: 当前请求的来源<br>Content-Encoding： 内容编码格式<br>User-Agent： 客户端信息<br>multipart/form-data：用以支持向服务器发送二进制数据，以便可以在 POST 请求中实现文件上传等功能</p>
+</li>
+<li><p>空行<br>用于告诉服务端请求头到此结束 以下内容不再是请求头的内容</p>
+</li>
+<li><p>请求数据<br>主要用于 POST 请求<br>相关的最常用的是（Content-Type 和 Content-Length ）</p>
+</li>
+</ul>
+<h4 id="HTTP-的响应报文包括四个部分"><a href="#HTTP-的响应报文包括四个部分" class="headerlink" title="HTTP 的响应报文包括四个部分"></a>HTTP 的响应报文包括四个部分</h4><ul>
+<li>状态行<br>服务器 HTTP 协议版本，响应状态码，状态码的文本描述</li>
+<li>响应头<br>Connection：是否保持长连接。keep-alive （默认） close<br>Content-Length：请求体的长度<br>Content-Type： 请求的格式/类型 text/html<br>Location：重定向的位置<br>Server： 服务器用来处理请求的软件信息及版本信息<br>Vary：标识不可缓存的请求头列表<br>Date: 时间</li>
+<li>空行<br>用于告诉客户端响应头到此结束 以下内容不再是响应头的内容</li>
+<li>响应内容<br>服务端返回客户端的文本信息</li>
+</ul>
+<blockquote>
+<p>参考资料 1.<a href="https://baike.baidu.com/item/HTTP%E8%AF%B7%E6%B1%82/10882159?fr=aladdin" target="_blank" rel="noopener">百度百科</a> 2.<a href="http://www.runoob.com/http/http-messages.html" target="_blank" rel="noopener">菜鸟教程</a></p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="//xhui.top/2019/05/14/Http请求与响应/" data-id="clwj7c8cq0002cmdiujiqhny6"
+         class="article-share-link">分享</a>
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+    
+  <nav class="article-nav">
+    
+      <a href="/2019/06/20/js基础整理/" class="article-nav-link">
+        <strong class="article-nav-caption">前一篇</strong>
+        <div class="article-nav-title">
+          
+            js基础整理
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2019/03/10/CSS常用系列整理/" class="article-nav-link">
+        <strong class="article-nav-caption">后一篇</strong>
+        <div class="article-nav-title">CSS常用系列整理</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+    
+  <div class="gitalk" id="gitalk-container"></div>
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+  <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.min.js"></script>
+  <script type="text/javascript">
+    var gitalk = new Gitalk({
+      clientID: 'e238813be5ede70edbe4',
+      clientSecret: '8a1c133e698954649de728ddaf86cd2a1a977f9b',
+      repo: 'xhuishen.github.io',
+      owner: 'xhuishen',
+      admin: ['xhuishen'],
+      // id: location.pathname,      // Ensure uniqueness and length less than 50
+      id: md5(location.pathname),
+      distractionFreeMode: false,  // Facebook-like distraction free mode
+      pagerDirection: 'last'
+    })
+
+  gitalk.render('gitalk-container')
+  </script>
+
+  
+
+</article>
+
+
+
+</section>
+  <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+    <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>&copy; 2024 一点儿都不慌</li>
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <!-- <li>Theme  <a href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li> -->
+    </ul>
+  </div>
+</footer>
+
+</main>
+<aside class="sidebar">
+  <button class="navbar-toggle"></button>
+
+<nav class="navbar">
+  
+    <div class="logo">
+      <a href="/"><img src="/images/logo.png" alt="一点儿都不慌"></a>
+    </div>
+  
+  <ul class="nav nav-main">
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/">首页</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/archives">归档</a>
+      </li>
+    
+      <li class="nav-item">
+        <a class="nav-item-link" href="/about">关于</a>
+      </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="Search">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+    <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+        <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+          <i class="fe fe-feed"></i>
+        </a>
+      
+    </li>
+  </ul>
+</nav>
+
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+</aside>
+<script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/snap.svg-min.js"></script>
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+  <script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+  <script src="/js/search.js"></script>
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+</html>
